@@ -1,7 +1,7 @@
 #!/usr/bin/env python3
 """Bounded production walkthroughs using only the public HTTP service."""
 import argparse, concurrent.futures, json, os, pathlib, shutil, socket, subprocess, tempfile, time, urllib.request, urllib.error
-WORKFLOWS=['catalog-create','txn-write','snapshot-read','index-build','query-plan','sql-execute','txn-conflict','restart','checkpoint','backup-restore','changes','vacuum','transaction-close','statistics']
+WORKFLOWS=['catalog-create','txn-write','snapshot-read','index-build','query-plan','sql-execute','txn-conflict','restart','checkpoint','backup-restore','changes','vacuum','transaction-close','statistics','serializable']
 class Session:
  def __init__(self,binary,root,restore=None):
   self.binary=str(binary);self.root=pathlib.Path(root);self.restore=restore;self.process=None;self.log=None
@@ -152,6 +152,83 @@ def walkthrough(name,binary):
     q=s.query(where=[{'column':'amplitude','op':'>=','value':40}],limit=2)
     require(q['matched']==3 and q['scanned']==3 and len(q['rows'])==2 and q['truncated'],'query fact meanings conflated')
     observations={'query':q,'stats':s.stats()}
+   elif name=='serializable':
+    def begin_serializable():return s.call('POST','/transactions',{'isolation':'serializable'},201)
+    probe=s.call('POST','/transactions',{},201)
+    require(probe['isolation']=='snapshot','default isolation changed');s.call('POST',f"/transactions/{probe['id']}/rollback")
+    s.call('POST','/transactions',{'isolation':'linearizable'},400)
+    # default snapshot mode keeps its promise: the same write skew still commits there
+    a=s.begin();b=s.begin()
+    s.put(a,{'sample':1,'band':'b1','amplitude':10,'valid':False});s.put(b,{'sample':2,'band':'b2','amplitude':20,'valid':False})
+    s.commit(a);s.commit(b)
+    require(s.query(where=[{'column':'valid','op':'=','value':True}])['matched']==4,'snapshot write skew missing')
+    tx=s.begin();s.put(tx,tuple_(1));s.put(tx,tuple_(2));s.commit(tx)
+    # serializable: the skew is a data conflict; exactly one writer commits
+    ta=begin_serializable();tb=begin_serializable()
+    require(ta['isolation']=='serializable' and ta['snapshot']==tb['snapshot'],'serializable begin broken')
+    guard=[{'column':'sample','op':'<=','value':2}]
+    require(s.query(transaction=ta['id'],where=guard)['matched']==2 and s.query(transaction=tb['id'],where=guard)['matched']==2,'guard reads failed')
+    s.put(ta['id'],{'sample':1,'band':'b1','amplitude':10,'valid':False})
+    s.put(tb['id'],{'sample':2,'band':'b2','amplitude':20,'valid':False})
+    def attempt(t):
+     try:return {'commit':s.commit(t)}
+     except RuntimeError as e:
+      require('got 409' in str(e) and 'serialization conflict' in str(e),f'unexpected serializable failure: {e}')
+      return {'conflict':True}
+    with concurrent.futures.ThreadPoolExecutor(2) as pool:
+     results=[job.result() for job in [pool.submit(attempt,ta['id']),pool.submit(attempt,tb['id'])]]
+    require(sum('conflict' in r for r in results)==1,'exactly one serializable writer must lose')
+    require(sum(1 for r in s.query(where=guard)['rows'] if r['valid'])==1,'write skew invariant broken')
+    # phantom: a concurrent insert into the read basis is a data conflict; retry on a fresh basis commits
+    t=begin_serializable()
+    require(s.query(transaction=t['id'],where=[{'column':'amplitude','op':'>=','value':100}])['matched']==0,'phantom precondition failed')
+    w=s.begin();s.put(w,tuple_(8,amplitude=150));s.commit(w)
+    s.put(t['id'],tuple_(9))
+    body=s.commit(t['id'],409);require(body['error']['code']=='conflict','phantom must be a data conflict')
+    t=begin_serializable()
+    require(s.query(transaction=t['id'],where=[{'column':'amplitude','op':'>=','value':100}])['matched']==1,'retry must observe the phantom')
+    s.put(t['id'],tuple_(9));s.commit(t['id'])
+    # vacuum: a long serializable transaction pins the horizon until the operator expires its read basis
+    long=begin_serializable()
+    basis=[{'column':'amplitude','op':'>=','value':50}]
+    require(s.query(transaction=long['id'],where=basis)['matched']==4,'long read failed')
+    w=s.begin();s.put(w,tuple_(10));s.commit(w)
+    requested=s.stats()['sequence']
+    pinned=s.call('POST','/vacuum',{'horizon':requested})
+    require(pinned['pinned'] and pinned['horizon']==long['snapshot'],'vacuum crossed a serializable read basis')
+    require(s.query(transaction=long['id'],where=basis)['matched']==4,'pinned read basis lost')
+    forced=s.call('POST','/vacuum',{'horizon':requested,'expire_serializable':True})
+    require(not forced['pinned'] and forced['horizon']==requested and forced.get('expired')==[long['id']],'forced vacuum did not expire the read basis')
+    body=s.commit(long['id'],429);require(body['error']['code']=='capacity','expiry must be a resource rejection')
+    s.commit(long['id'],404)
+    s.call('POST','/query',{'relation':'spectra','transaction':long['id'],'where':basis},404)
+    s.call('POST','/query',{'relation':'spectra','at':long['snapshot']},410)
+    s.call('POST','/query',{'relation':'spectra','at':seed_seq},410)
+    # resource bound: more than 64 distinct read bases expires the transaction
+    t=begin_serializable()
+    for n in range(64):s.query(transaction=t['id'],where=[{'column':'amplitude','op':'>=','value':n}])
+    body=s.call('POST','/query',{'relation':'spectra','transaction':t['id'],'where':[{'column':'amplitude','op':'>=','value':64}]},429)
+    require(body['error']['code']=='capacity','read basis budget must be a resource rejection')
+    s.commit(t['id'],429)
+    # a fresh serializable transaction still commits; its own writes never trip certification
+    t=begin_serializable()
+    require(s.query(transaction=t['id'],where=[{'column':'amplitude','op':'>=','value':100}])['matched']==2,'fresh basis stale')
+    s.put(t['id'],{'sample':11,'band':'b11','amplitude':200,'valid':True});s.commit(t['id'])
+    st=s.stats()
+    require(st['serialization_conflicts_since_open']>=2 and st['serialization_expired_since_open']>=2,'rejection counters wrong')
+    # restart: recovery replays exactly the certified history
+    s.call('POST','/checkpoint');s.stop();s.start()
+    rows=s.query()['rows']
+    require(sum(1 for r in rows if r['sample'] in (1,2) and r['valid'])==1,'restart changed the certified outcome')
+    require(any(r['sample']==8 and r['amplitude']==150 for r in rows),'certified phantom lost')
+    require(any(r['sample']==11 and r['amplitude']==200 for r in rows),'certified commit lost')
+    require(s.stats()['horizon']==requested,'vacuum horizon did not survive restart')
+    page=s.call('GET','/changes?after=0&limit=1000')
+    certified=[r for r in page['records'] if r.get('isolation')=='serializable']
+    require(len(certified)==3,'certified commits not journaled')
+    skew=[w for r in certified for w in r['writes'] if w['key'] in ('int:1','int:2')]
+    require(len(skew)==1 and not skew[0]['row']['valid'],'journal contains a stale-basis commit')
+    observations={'skew':results,'pinned':pinned,'forced':forced,'certified_commits':len(certified),'rejections':{'conflicts':st['serialization_conflicts_since_open'],'expired':st['serialization_expired_since_open']}}
    else:raise ValueError(name)
    return {'workflow':name,'status':'observed','observations':observations}
   finally:

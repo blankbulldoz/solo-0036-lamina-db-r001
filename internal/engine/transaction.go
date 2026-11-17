@@ -15,22 +15,32 @@ type staged struct {
 	InsertOnly bool
 }
 type Transaction struct {
-	ID       string `json:"id"`
-	Snapshot uint64 `json:"snapshot"`
-	ReadOnly bool   `json:"read_only"`
-	Started  string `json:"started"`
-	writes   map[string]map[string]staged
+	ID        string `json:"id"`
+	Snapshot  uint64 `json:"snapshot"`
+	ReadOnly  bool   `json:"read_only"`
+	Isolation string `json:"isolation"`
+	Started   string `json:"started"`
+	writes    map[string]map[string]staged
+	reads     []ReadBasis
+	seen      map[string]bool
+	expired   string
 }
 type Commit struct {
 	Sequence uint64 `json:"sequence"`
 	Writes   int    `json:"writes"`
 }
 
-func (d *DB) Begin(readOnly bool) (Transaction, error) {
+func (d *DB) Begin(readOnly bool, isolation string) (Transaction, error) {
 	d.mu.Lock()
 	defer d.mu.Unlock()
 	if err := d.usable(); err != nil {
 		return Transaction{}, err
+	}
+	if isolation == "" {
+		isolation = "snapshot"
+	}
+	if isolation != "snapshot" && isolation != "serializable" {
+		return Transaction{}, fault("invalid", "isolation must be snapshot or serializable")
 	}
 	if len(d.transactions) >= 128 {
 		return Transaction{}, fault("capacity", "128 active transactions reached")
@@ -39,10 +49,12 @@ func (d *DB) Begin(readOnly bool) (Transaction, error) {
 	if _, err := rand.Read(id[:]); err != nil {
 		return Transaction{}, err
 	}
-	tx := &Transaction{ID: hex.EncodeToString(id[:]), Snapshot: d.sequence, ReadOnly: readOnly, Started: time.Now().UTC().Format(time.RFC3339Nano), writes: map[string]map[string]staged{}}
+	tx := &Transaction{ID: hex.EncodeToString(id[:]), Snapshot: d.sequence, ReadOnly: readOnly, Isolation: isolation, Started: time.Now().UTC().Format(time.RFC3339Nano), writes: map[string]map[string]staged{}, seen: map[string]bool{}}
 	d.transactions[tx.ID] = tx
 	out := *tx
 	out.writes = nil
+	out.reads = nil
+	out.seen = nil
 	return out, nil
 }
 func (d *DB) tx(id string) (*Transaction, error) {
@@ -64,6 +76,9 @@ func (d *DB) Put(id, table string, row datum.Row, insertOnly bool) error {
 	}
 	if tx.ReadOnly {
 		return fault("conflict", "read-only transaction")
+	}
+	if tx.expired != "" {
+		return fault("capacity", "serializable transaction expired: %s", tx.expired)
 	}
 	r, err := d.catalog.Relation(table)
 	if err != nil {
@@ -119,6 +134,9 @@ func (d *DB) Delete(id, table string, value datum.Value) error {
 	if tx.ReadOnly {
 		return fault("conflict", "read-only transaction")
 	}
+	if tx.expired != "" {
+		return fault("capacity", "serializable transaction expired: %s", tx.expired)
+	}
 	r, err := d.catalog.Relation(table)
 	if err != nil {
 		return invalid(err)
@@ -163,6 +181,9 @@ func (d *DB) Commit(id string) (Commit, error) {
 		return Commit{}, err
 	}
 	defer delete(d.transactions, id)
+	if tx.expired != "" {
+		return Commit{}, fault("capacity", "serializable transaction expired: %s", tx.expired)
+	}
 	writes := make([]versions.Mutation, 0)
 	for table, mutations := range tx.writes {
 		for key, m := range mutations {
@@ -180,13 +201,27 @@ func (d *DB) Commit(id string) (Commit, error) {
 	if len(writes) == 0 {
 		return Commit{Sequence: tx.Snapshot}, nil
 	}
+	if tx.serializable() {
+		if tx.Snapshot < d.horizon {
+			d.serializationExpired++
+			return Commit{}, fault("capacity", "serializable transaction expired: read basis no longer retained")
+		}
+		if err = d.validateReads(tx); err != nil {
+			d.serializationConflicts++
+			return Commit{}, err
+		}
+	}
 	sort.Slice(writes, func(i, j int) bool {
 		if writes[i].Relation == writes[j].Relation {
 			return writes[i].Key < writes[j].Key
 		}
 		return writes[i].Relation < writes[j].Relation
 	})
-	if err = d.publish(journal.Record{Kind: "commit", Transaction: id, Writes: writes}); err != nil {
+	record := journal.Record{Kind: "commit", Transaction: id, Writes: writes}
+	if tx.serializable() {
+		record.Isolation = "serializable"
+	}
+	if err = d.publish(record); err != nil {
 		return Commit{}, err
 	}
 	d.commits++

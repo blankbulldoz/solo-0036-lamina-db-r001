@@ -16,12 +16,13 @@ func (s *Server) checkpoint(w http.ResponseWriter, r *http.Request) {
 }
 func (s *Server) vacuum(w http.ResponseWriter, r *http.Request) {
 	var in struct {
-		Horizon uint64 `json:"horizon"`
+		Horizon            uint64 `json:"horizon"`
+		ExpireSerializable bool   `json:"expire_serializable"`
 	}
 	if !decode(w, r, &in) {
 		return
 	}
-	out, err := s.db.Vacuum(in.Horizon)
+	out, err := s.db.Vacuum(in.Horizon, in.ExpireSerializable)
 	if err != nil {
 		respondError(w, err)
 		return

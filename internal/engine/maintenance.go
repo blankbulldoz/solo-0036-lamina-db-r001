@@ -8,6 +8,7 @@ import (
 	"lamina/internal/versions"
 	"os"
 	"path/filepath"
+	"sort"
 )
 
 func (d *DB) image() snapshot.Image {
@@ -70,7 +71,7 @@ func Restore(dir string, data []byte) error {
 	installed = true
 	return nil
 }
-func (d *DB) Vacuum(requested uint64) (versions.VacuumResult, error) {
+func (d *DB) Vacuum(requested uint64, expireSerializable bool) (versions.VacuumResult, error) {
 	d.mu.Lock()
 	defer d.mu.Unlock()
 	if err := d.usable(); err != nil {
@@ -81,16 +82,26 @@ func (d *DB) Vacuum(requested uint64) (versions.VacuumResult, error) {
 	}
 	horizon := requested
 	for _, tx := range d.transactions {
-		if tx.Snapshot < horizon {
+		if tx.Snapshot < horizon && !(expireSerializable && tx.expirable()) {
 			horizon = tx.Snapshot
 		}
 	}
-	beforeKeys, beforeVersions := d.store.Count()
-	_ = beforeKeys
+	var expired []string
+	if expireSerializable {
+		for _, tx := range d.transactions {
+			if tx.expirable() && tx.Snapshot < horizon && tx.expired == "" {
+				tx.expired = fmt.Sprintf("read basis reclaimed by vacuum at horizon %d", horizon)
+				expired = append(expired, tx.ID)
+				d.serializationExpired++
+			}
+		}
+		sort.Strings(expired)
+	}
+	_, beforeVersions := d.store.Count()
 	if err := d.publish(journal.Record{Kind: "vacuum", Horizon: horizon}); err != nil {
 		return versions.VacuumResult{}, err
 	}
 	_, remaining := d.store.Count()
 	d.indexes = index.Build(d.catalog, d.store)
-	return versions.VacuumResult{Horizon: horizon, Removed: beforeVersions - remaining, Retained: remaining, Pinned: horizon < requested}, nil
+	return versions.VacuumResult{Horizon: horizon, Removed: beforeVersions - remaining, Retained: remaining, Pinned: horizon < requested, Expired: expired}, nil
 }

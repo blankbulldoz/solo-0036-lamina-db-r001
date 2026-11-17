@@ -7,12 +7,13 @@ import (
 
 func (s *Server) begin(w http.ResponseWriter, r *http.Request) {
 	var in struct {
-		ReadOnly bool `json:"read_only"`
+		ReadOnly  bool   `json:"read_only"`
+		Isolation string `json:"isolation"`
 	}
 	if !decode(w, r, &in) {
 		return
 	}
-	out, err := s.db.Begin(in.ReadOnly)
+	out, err := s.db.Begin(in.ReadOnly, in.Isolation)
 	if err != nil {
 		respondError(w, err)
 		return

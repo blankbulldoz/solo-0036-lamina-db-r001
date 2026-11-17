@@ -29,6 +29,9 @@ func (d *DB) Query(q query.Request) (query.Result, error) {
 	} else if q.At != nil {
 		at = *q.At
 	}
+	if tx != nil && tx.expired != "" {
+		return query.Result{}, fault("capacity", "serializable transaction expired: %s", tx.expired)
+	}
 	if at < d.horizon || at > d.sequence {
 		return query.Result{}, fault("snapshot", "snapshot unavailable; retained interval %d..%d", d.horizon, d.sequence)
 	}
@@ -59,6 +62,11 @@ func (d *DB) Query(q query.Request) (query.Result, error) {
 	d.queries++
 	if err != nil {
 		return result, invalid(err)
+	}
+	if tx != nil && tx.serializable() {
+		if err = d.recordRead(tx, q.Relation, q.Where); err != nil {
+			return query.Result{}, err
+		}
 	}
 	return result, nil
 }
