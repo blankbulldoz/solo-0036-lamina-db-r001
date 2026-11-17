@@ -1,0 +1,388 @@
+{
+  "name": "solo-0036-lamina-db",
+  "language": "Go",
+  "project_shape": "backend",
+  "modules": [
+    {
+      "id": "datum",
+      "name": "datum",
+      "path": "internal/datum",
+      "responsibility": "typed scalar comparison, null, canonical tuple keys"
+    },
+    {
+      "id": "catalog",
+      "name": "catalog",
+      "path": "internal/catalog",
+      "responsibility": "immutable relation schemas, index definitions and normalization"
+    },
+    {
+      "id": "versions",
+      "name": "versions",
+      "path": "internal/versions",
+      "responsibility": "per-key version chains and visibility, retention pruning"
+    },
+    {
+      "id": "journal",
+      "name": "journal",
+      "path": "internal/journal",
+      "responsibility": "checksummed framed fsync records, tail recovery and ordering"
+    },
+    {
+      "id": "index",
+      "name": "index",
+      "path": "internal/index",
+      "responsibility": "typed sorted secondary access candidates with historical supersets"
+    },
+    {
+      "id": "query",
+      "name": "query",
+      "path": "internal/query",
+      "responsibility": "predicate binding, access selection, projection, ordering and aggregation"
+    },
+    {
+      "id": "snapshot",
+      "name": "snapshot",
+      "path": "internal/snapshot",
+      "responsibility": "checksummed atomic checkpoint and immutable backup envelopes"
+    },
+    {
+      "id": "engine",
+      "name": "engine",
+      "path": "internal/engine",
+      "responsibility": "transaction lifecycles, conflict and constraint validation before durable publish"
+    },
+    {
+      "id": "transport",
+      "name": "transport",
+      "path": "internal/transport",
+      "responsibility": "bounded HTTP decoding and error/result mapping"
+    },
+    {
+      "id": "syntax",
+      "name": "syntax",
+      "path": "internal/syntax",
+      "responsibility": "SQL subset lexer/parser to the same bound query and transaction semantics"
+    }
+  ],
+  "workflows": [
+    {
+      "id": "catalog-create",
+      "name": "typed relation admission",
+      "entry": "POST /relations",
+      "steps": [
+        "transport",
+        "catalog",
+        "engine",
+        "journal"
+      ],
+      "module_ids": [
+        "transport",
+        "catalog",
+        "engine",
+        "journal"
+      ],
+      "success": "typed relation admission produces a verified domain result",
+      "failure": "invalid schema leaves no relation",
+      "verification": "python3 examples/walkthrough.py --workflow catalog-create"
+    },
+    {
+      "id": "txn-write",
+      "name": "snapshot transaction staging and commit",
+      "entry": "POST /transactions/{tx}/put then /commit",
+      "steps": [
+        "transport",
+        "engine",
+        "versions",
+        "catalog",
+        "journal",
+        "index"
+      ],
+      "module_ids": [
+        "transport",
+        "engine",
+        "catalog",
+        "versions",
+        "journal",
+        "index"
+      ],
+      "success": "snapshot transaction staging and commit produces a verified domain result",
+      "failure": "first committer wins; unique validation against current full resulting state",
+      "verification": "python3 examples/walkthrough.py --workflow txn-write"
+    },
+    {
+      "id": "snapshot-read",
+      "name": "repeatable reads and read own writes",
+      "entry": "POST /query with transaction or at",
+      "steps": [
+        "transport",
+        "engine",
+        "query",
+        "versions",
+        "datum"
+      ],
+      "module_ids": [
+        "transport",
+        "engine",
+        "query",
+        "versions",
+        "datum"
+      ],
+      "success": "repeatable reads and read own writes produces a verified domain result",
+      "failure": "active transactions retain versions; unsupported timestamp rejected",
+      "verification": "python3 examples/walkthrough.py --workflow snapshot-read"
+    },
+    {
+      "id": "index-build",
+      "name": "single-column unique and ordered secondary index",
+      "entry": "POST /indexes",
+      "steps": [
+        "transport",
+        "engine",
+        "catalog",
+        "index",
+        "versions",
+        "journal"
+      ],
+      "module_ids": [
+        "transport",
+        "engine",
+        "catalog",
+        "index",
+        "versions",
+        "journal"
+      ],
+      "success": "single-column unique and ordered secondary index produces a verified domain result",
+      "failure": "failed unique build leaves no catalog entry",
+      "verification": "python3 examples/walkthrough.py --workflow index-build"
+    },
+    {
+      "id": "query-plan",
+      "name": "indexed candidates and residual selection",
+      "entry": "POST /query with where",
+      "steps": [
+        "transport",
+        "query",
+        "index",
+        "versions",
+        "datum"
+      ],
+      "module_ids": [
+        "transport",
+        "query",
+        "index",
+        "versions",
+        "datum",
+        "engine"
+      ],
+      "success": "indexed candidates and residual selection produces a verified domain result",
+      "failure": "historical snapshot always rechecks visible versions",
+      "verification": "python3 examples/walkthrough.py --workflow query-plan"
+    },
+    {
+      "id": "sql-execute",
+      "name": "SELECT SQL subset and aggregates",
+      "entry": "POST /sql",
+      "steps": [
+        "transport",
+        "syntax",
+        "query",
+        "engine"
+      ],
+      "module_ids": [
+        "transport",
+        "syntax",
+        "query",
+        "engine",
+        "datum"
+      ],
+      "success": "SELECT SQL subset and aggregates produces a verified domain result",
+      "failure": "syntax errors cannot partially execute; SQL and structured query agree",
+      "verification": "python3 examples/walkthrough.py --workflow sql-execute"
+    },
+    {
+      "id": "txn-conflict",
+      "name": "concurrent writes and atomic abort",
+      "entry": "POST /transactions/{tx}/commit",
+      "steps": [
+        "transport",
+        "engine",
+        "versions",
+        "journal"
+      ],
+      "module_ids": [
+        "transport",
+        "engine",
+        "versions",
+        "journal",
+        "catalog"
+      ],
+      "success": "concurrent writes and atomic abort produces a verified domain result",
+      "failure": "no partial commit or sequence advance on conflict",
+      "verification": "python3 examples/walkthrough.py --workflow txn-conflict"
+    },
+    {
+      "id": "restart",
+      "name": "checkpoint plus journal replay",
+      "entry": "laminad startup",
+      "steps": [
+        "snapshot",
+        "engine",
+        "journal",
+        "catalog",
+        "versions",
+        "index"
+      ],
+      "module_ids": [
+        "snapshot",
+        "engine",
+        "journal",
+        "catalog",
+        "versions",
+        "index"
+      ],
+      "success": "checkpoint plus journal replay produces a verified domain result",
+      "failure": "incomplete final frame truncated; complete corruption fails closed",
+      "verification": "python3 examples/walkthrough.py --workflow restart"
+    },
+    {
+      "id": "checkpoint",
+      "name": "durable consistent image",
+      "entry": "POST /checkpoint",
+      "steps": [
+        "transport",
+        "engine",
+        "snapshot",
+        "journal"
+      ],
+      "module_ids": [
+        "transport",
+        "engine",
+        "snapshot",
+        "journal"
+      ],
+      "success": "durable consistent image produces a verified domain result",
+      "failure": "previous image survives failed replacement",
+      "verification": "python3 examples/walkthrough.py --workflow checkpoint"
+    },
+    {
+      "id": "backup-restore",
+      "name": "portable export and empty-directory restore",
+      "entry": "GET /backup; laminad -restore",
+      "steps": [
+        "transport",
+        "engine",
+        "snapshot",
+        "catalog",
+        "versions"
+      ],
+      "module_ids": [
+        "transport",
+        "engine",
+        "snapshot",
+        "catalog",
+        "versions",
+        "journal"
+      ],
+      "success": "portable export and empty-directory restore produces a verified domain result",
+      "failure": "digest and format validated before startup publishes state",
+      "verification": "python3 examples/walkthrough.py --workflow backup-restore"
+    },
+    {
+      "id": "changes",
+      "name": "commit-bounded change feed",
+      "entry": "GET /changes",
+      "steps": [
+        "transport",
+        "engine",
+        "journal",
+        "catalog"
+      ],
+      "module_ids": [
+        "transport",
+        "engine",
+        "journal",
+        "catalog"
+      ],
+      "success": "commit-bounded change feed produces a verified domain result",
+      "failure": "no split transaction at page boundary; watermark is last delivered sequence",
+      "verification": "python3 examples/walkthrough.py --workflow changes"
+    },
+    {
+      "id": "vacuum",
+      "name": "snapshot protected version reclamation",
+      "entry": "POST /vacuum",
+      "steps": [
+        "transport",
+        "engine",
+        "versions",
+        "index",
+        "snapshot"
+      ],
+      "module_ids": [
+        "transport",
+        "engine",
+        "versions",
+        "index",
+        "journal"
+      ],
+      "success": "snapshot protected version reclamation produces a verified domain result",
+      "failure": "lowest active read timestamp limits pruning",
+      "verification": "python3 examples/walkthrough.py --workflow vacuum"
+    },
+    {
+      "id": "transaction-close",
+      "name": "rollback and closed session behavior",
+      "entry": "POST /transactions/{tx}/rollback",
+      "steps": [
+        "transport",
+        "engine",
+        "versions"
+      ],
+      "module_ids": [
+        "transport",
+        "engine",
+        "versions"
+      ],
+      "success": "rollback and closed session behavior produces a verified domain result",
+      "failure": "discard private writes, retain no pins",
+      "verification": "python3 examples/walkthrough.py --workflow transaction-close"
+    },
+    {
+      "id": "statistics",
+      "name": "query execution facts and database resource state",
+      "entry": "GET /stats and POST /query",
+      "steps": [
+        "transport",
+        "query",
+        "engine",
+        "index",
+        "versions"
+      ],
+      "module_ids": [
+        "transport",
+        "engine",
+        "query",
+        "index",
+        "versions"
+      ],
+      "success": "query execution facts and database resource state produces a verified domain result",
+      "failure": "candidates vs scanned vs returned have distinct meanings",
+      "verification": "python3 examples/walkthrough.py --workflow statistics"
+    }
+  ],
+  "complexity": {
+    "mechanisms": [
+      "state_machine",
+      "concurrency",
+      "recovery_rollback",
+      "batch_transaction",
+      "snapshot_consistency",
+      "resource_lifecycle",
+      "export_freeze",
+      "error_propagation",
+      "lineage",
+      "policy_rules",
+      "versioning_audit"
+    ]
+  }
+}

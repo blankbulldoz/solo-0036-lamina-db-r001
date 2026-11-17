@@ -1,0 +1,67 @@
+{
+  "language": "Go",
+  "project_shape": "backend",
+  "source_extensions": [
+    ".go"
+  ],
+  "build_command": "go build -o bin/laminad ./cmd/laminad",
+  "testing": "deferred",
+  "workflow_checks": [
+    {
+      "workflow_id": "catalog-create",
+      "command": "python3 examples/walkthrough.py --workflow catalog-create"
+    },
+    {
+      "workflow_id": "txn-write",
+      "command": "python3 examples/walkthrough.py --workflow txn-write"
+    },
+    {
+      "workflow_id": "snapshot-read",
+      "command": "python3 examples/walkthrough.py --workflow snapshot-read"
+    },
+    {
+      "workflow_id": "index-build",
+      "command": "python3 examples/walkthrough.py --workflow index-build"
+    },
+    {
+      "workflow_id": "query-plan",
+      "command": "python3 examples/walkthrough.py --workflow query-plan"
+    },
+    {
+      "workflow_id": "sql-execute",
+      "command": "python3 examples/walkthrough.py --workflow sql-execute"
+    },
+    {
+      "workflow_id": "txn-conflict",
+      "command": "python3 examples/walkthrough.py --workflow txn-conflict"
+    },
+    {
+      "workflow_id": "restart",
+      "command": "python3 examples/walkthrough.py --workflow restart"
+    },
+    {
+      "workflow_id": "checkpoint",
+      "command": "python3 examples/walkthrough.py --workflow checkpoint"
+    },
+    {
+      "workflow_id": "backup-restore",
+      "command": "python3 examples/walkthrough.py --workflow backup-restore"
+    },
+    {
+      "workflow_id": "changes",
+      "command": "python3 examples/walkthrough.py --workflow changes"
+    },
+    {
+      "workflow_id": "vacuum",
+      "command": "python3 examples/walkthrough.py --workflow vacuum"
+    },
+    {
+      "workflow_id": "transaction-close",
+      "command": "python3 examples/walkthrough.py --workflow transaction-close"
+    },
+    {
+      "workflow_id": "statistics",
+      "command": "python3 examples/walkthrough.py --workflow statistics"
+    }
+  ]
+}

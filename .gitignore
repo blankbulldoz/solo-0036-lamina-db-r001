@@ -1,0 +1,9 @@
+/bin/
+/var/
+*.log
+.env
+.env.*
+*token*
+*secret*
+*.key
+*.pem

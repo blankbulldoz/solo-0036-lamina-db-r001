@@ -1,0 +1,5714 @@
+{
+  "task_source_schema_version": 1,
+  "cc_feedback_profile": "cc-feedback-2611",
+  "project_domain": "基础设施",
+  "project_subdirection": "数据库",
+  "supported_task_types": [
+    "功能开发",
+    "代码重构",
+    "功能优化",
+    "依赖升级与迁移",
+    "质量保障",
+    "项目维护",
+    "技术讨论",
+    "问题排查与诊断",
+    "部署运维",
+    "泛Agent需求"
+  ],
+  "type_coverage": {
+    "功能开发": {
+      "status": "supported",
+      "reason": "事务、版本、日志、查询的真实接缝支持新数据库能力。",
+      "source_anchors": [
+        "internal/catalog/schema.go",
+        "internal/engine/changes.go",
+        "internal/engine/constraints.go",
+        "internal/engine/database.go",
+        "internal/engine/maintenance.go",
+        "internal/engine/read.go",
+        "internal/engine/replay.go",
+        "internal/engine/transaction.go",
+        "internal/index/registry.go",
+        "internal/journal/record.go",
+        "internal/journal/wal.go",
+        "internal/query/bind.go",
+        "internal/query/execute.go",
+        "internal/query/plan.go",
+        "internal/snapshot/image.go",
+        "internal/syntax/parser.go",
+        "internal/versions/store.go",
+        "internal/versions/vacuum.go"
+      ],
+      "platform_eligibility": "pending independent source/experiment admission; taxonomy follows supplied PDF"
+    },
+    "Bugfix": {
+      "status": "no_verified_defect",
+      "reason": "当前构建及14条工作流检查通过；未确认真实缺陷，不植入缺陷。"
+    },
+    "代码重构": {
+      "status": "supported",
+      "reason": "当前职责可以沿验证、捕获、发布和解释边界演进。",
+      "source_anchors": [
+        "internal/catalog/schema.go",
+        "internal/engine/changes.go",
+        "internal/engine/constraints.go",
+        "internal/engine/database.go",
+        "internal/engine/maintenance.go",
+        "internal/engine/read.go",
+        "internal/engine/replay.go",
+        "internal/engine/stats.go",
+        "internal/engine/transaction.go",
+        "internal/index/registry.go",
+        "internal/journal/record.go",
+        "internal/journal/wal.go",
+        "internal/query/bind.go",
+        "internal/query/execute.go",
+        "internal/query/plan.go",
+        "internal/snapshot/atomic.go",
+        "internal/snapshot/image.go",
+        "internal/syntax/parser.go",
+        "internal/versions/store.go",
+        "internal/versions/vacuum.go"
+      ],
+      "platform_eligibility": "pending independent source/experiment admission; taxonomy follows supplied PDF"
+    },
+    "功能优化": {
+      "status": "supported",
+      "reason": "既有查询、提交和维护行为存在跨职责扩展空间。",
+      "source_anchors": [
+        "internal/catalog/schema.go",
+        "internal/engine/changes.go",
+        "internal/engine/constraints.go",
+        "internal/engine/database.go",
+        "internal/engine/maintenance.go",
+        "internal/engine/read.go",
+        "internal/engine/replay.go",
+        "internal/engine/stats.go",
+        "internal/engine/transaction.go",
+        "internal/index/registry.go",
+        "internal/journal/record.go",
+        "internal/journal/wal.go",
+        "internal/query/bind.go",
+        "internal/query/execute.go",
+        "internal/query/plan.go",
+        "internal/snapshot/atomic.go",
+        "internal/snapshot/image.go",
+        "internal/syntax/parser.go",
+        "internal/versions/store.go",
+        "internal/versions/vacuum.go"
+      ],
+      "platform_eligibility": "pending independent source/experiment admission; taxonomy follows supplied PDF"
+    },
+    "依赖升级与迁移": {
+      "status": "supported",
+      "reason": "现用JSON帧、切片索引及镜像格式有具体替代实现与历史数据入口。",
+      "source_anchors": [
+        "internal/catalog/schema.go",
+        "internal/engine/changes.go",
+        "internal/engine/constraints.go",
+        "internal/engine/database.go",
+        "internal/engine/maintenance.go",
+        "internal/engine/read.go",
+        "internal/engine/replay.go",
+        "internal/engine/transaction.go",
+        "internal/journal/record.go",
+        "internal/journal/wal.go",
+        "internal/query/bind.go",
+        "internal/query/execute.go",
+        "internal/query/plan.go",
+        "internal/snapshot/atomic.go",
+        "internal/snapshot/image.go",
+        "internal/syntax/parser.go",
+        "internal/versions/store.go"
+      ],
+      "platform_eligibility": "pending independent source/experiment admission; taxonomy follows supplied PDF"
+    },
+    "质量保障": {
+      "status": "supported",
+      "reason": "真实SQL、索引、快照及恢复可以建立独立差分及状态机验证。",
+      "source_anchors": [
+        "internal/catalog/schema.go",
+        "internal/engine/changes.go",
+        "internal/engine/constraints.go",
+        "internal/engine/database.go",
+        "internal/engine/maintenance.go",
+        "internal/engine/read.go",
+        "internal/engine/replay.go",
+        "internal/engine/stats.go",
+        "internal/engine/transaction.go",
+        "internal/index/registry.go",
+        "internal/journal/record.go",
+        "internal/journal/wal.go",
+        "internal/query/bind.go",
+        "internal/query/execute.go",
+        "internal/query/plan.go",
+        "internal/snapshot/image.go",
+        "internal/syntax/parser.go",
+        "internal/versions/store.go",
+        "internal/versions/vacuum.go"
+      ],
+      "platform_eligibility": "pending independent source/experiment admission; taxonomy follows supplied PDF"
+    },
+    "项目维护": {
+      "status": "supported",
+      "reason": "协议、持久格式、隔离与资源承诺需跨源码整理。",
+      "source_anchors": [
+        "internal/catalog/schema.go",
+        "internal/engine/changes.go",
+        "internal/engine/constraints.go",
+        "internal/engine/database.go",
+        "internal/engine/maintenance.go",
+        "internal/engine/read.go",
+        "internal/engine/replay.go",
+        "internal/engine/stats.go",
+        "internal/engine/transaction.go",
+        "internal/index/registry.go",
+        "internal/journal/record.go",
+        "internal/journal/wal.go",
+        "internal/query/bind.go",
+        "internal/query/execute.go",
+        "internal/query/plan.go",
+        "internal/snapshot/atomic.go",
+        "internal/snapshot/image.go",
+        "internal/syntax/parser.go",
+        "internal/versions/store.go",
+        "internal/versions/vacuum.go"
+      ],
+      "platform_eligibility": "pending independent source/experiment admission; taxonomy follows supplied PDF"
+    },
+    "技术讨论": {
+      "status": "supported",
+      "reason": "快照隔离、索引膨胀和耐久性存在源码可验证的架构取舍。",
+      "source_anchors": [
+        "internal/catalog/schema.go",
+        "internal/engine/changes.go",
+        "internal/engine/constraints.go",
+        "internal/engine/database.go",
+        "internal/engine/maintenance.go",
+        "internal/engine/read.go",
+        "internal/engine/replay.go",
+        "internal/engine/transaction.go",
+        "internal/index/registry.go",
+        "internal/journal/record.go",
+        "internal/journal/wal.go",
+        "internal/query/bind.go",
+        "internal/query/execute.go",
+        "internal/query/plan.go",
+        "internal/snapshot/atomic.go",
+        "internal/snapshot/image.go",
+        "internal/syntax/parser.go",
+        "internal/versions/store.go",
+        "internal/versions/vacuum.go"
+      ],
+      "platform_eligibility": "pending independent source/experiment admission; taxonomy follows supplied PDF"
+    },
+    "问题排查与诊断": {
+      "status": "supported",
+      "reason": "真实运行可复现历史候选膨胀、活动事务阻挡回收等现象，无需植入故障。",
+      "source_anchors": [
+        "internal/catalog/schema.go",
+        "internal/engine/changes.go",
+        "internal/engine/constraints.go",
+        "internal/engine/database.go",
+        "internal/engine/maintenance.go",
+        "internal/engine/read.go",
+        "internal/engine/replay.go",
+        "internal/engine/transaction.go",
+        "internal/index/registry.go",
+        "internal/journal/record.go",
+        "internal/journal/wal.go",
+        "internal/query/bind.go",
+        "internal/query/execute.go",
+        "internal/query/plan.go",
+        "internal/snapshot/atomic.go",
+        "internal/snapshot/image.go",
+        "internal/syntax/parser.go",
+        "internal/versions/store.go",
+        "internal/versions/vacuum.go"
+      ],
+      "platform_eligibility": "pending independent source/experiment admission; taxonomy follows supplied PDF"
+    },
+    "部署运维": {
+      "status": "supported",
+      "reason": "真实HTTP服务、独占数据目录、容器与恢复入口支持部署和演练。",
+      "source_anchors": [
+        "internal/catalog/schema.go",
+        "internal/engine/constraints.go",
+        "internal/engine/database.go",
+        "internal/engine/maintenance.go",
+        "internal/engine/replay.go",
+        "internal/engine/stats.go",
+        "internal/engine/transaction.go",
+        "internal/index/registry.go",
+        "internal/journal/wal.go",
+        "internal/query/bind.go",
+        "internal/query/execute.go",
+        "internal/snapshot/atomic.go",
+        "internal/snapshot/image.go",
+        "internal/syntax/parser.go",
+        "internal/versions/store.go",
+        "internal/versions/vacuum.go"
+      ],
+      "platform_eligibility": "pending independent source/experiment admission; taxonomy follows supplied PDF"
+    },
+    "泛Agent需求": {
+      "status": "supported",
+      "reason": "数据库工作负载、提交轨迹、备份与恢复事实支持仓库锚定的数据和材料交付。",
+      "source_anchors": [
+        "internal/catalog/schema.go",
+        "internal/engine/changes.go",
+        "internal/engine/constraints.go",
+        "internal/engine/database.go",
+        "internal/engine/maintenance.go",
+        "internal/engine/read.go",
+        "internal/engine/replay.go",
+        "internal/engine/stats.go",
+        "internal/engine/transaction.go",
+        "internal/index/registry.go",
+        "internal/journal/record.go",
+        "internal/journal/wal.go",
+        "internal/query/bind.go",
+        "internal/query/execute.go",
+        "internal/query/plan.go",
+        "internal/snapshot/atomic.go",
+        "internal/snapshot/image.go",
+        "internal/syntax/parser.go",
+        "internal/versions/store.go",
+        "internal/versions/vacuum.go"
+      ],
+      "platform_eligibility": "pending independent source/experiment admission; taxonomy follows supplied PDF"
+    }
+  },
+  "prompt_contract": {
+    "schema_version": 1,
+    "mode": "integrated",
+    "baseline_tier": "deep-task-ready",
+    "generation_scope": {
+      "mode": "all_supported"
+    },
+    "minimum_active_prompts": {
+      "功能开发": 20,
+      "功能优化": 20,
+      "代码重构": 2,
+      "依赖升级与迁移": 2,
+      "质量保障": 2,
+      "项目维护": 2,
+      "技术讨论": 2,
+      "问题排查与诊断": 2,
+      "部署运维": 2,
+      "泛Agent需求": 10
+    },
+    "minimum_anchors": {
+      "功能开发": 25,
+      "功能优化": 25,
+      "代码重构": 15,
+      "依赖升级与迁移": 15,
+      "质量保障": 15,
+      "项目维护": 15,
+      "技术讨论": 15,
+      "问题排查与诊断": 15,
+      "部署运维": 15,
+      "泛Agent需求": 15
+    },
+    "capacity_floor": {
+      "modules": 8,
+      "workflows": 10,
+      "mechanisms": 8,
+      "entities": 8,
+      "state_machines": 5,
+      "extension_seams": 12,
+      "tension_points": 10
+    }
+  },
+  "entities": [
+    {
+      "id": "relation",
+      "label": "关系",
+      "relations": [
+        "column/index/tuple"
+      ],
+      "invariants": [
+        "模式与主键约束持久有效"
+      ]
+    },
+    {
+      "id": "column",
+      "label": "列",
+      "relations": [
+        "relation/typed value"
+      ],
+      "invariants": [
+        "类型和空值规则一致"
+      ]
+    },
+    {
+      "id": "index",
+      "label": "索引",
+      "relations": [
+        "relation/column/version"
+      ],
+      "invariants": [
+        "历史候选包含可见匹配行"
+      ]
+    },
+    {
+      "id": "tuple",
+      "label": "元组",
+      "relations": [
+        "relation/primary/version"
+      ],
+      "invariants": [
+        "主键标识与行内容一致"
+      ]
+    },
+    {
+      "id": "version",
+      "label": "版本",
+      "relations": [
+        "tuple/sequence"
+      ],
+      "invariants": [
+        "仅可见已提交版本"
+      ]
+    },
+    {
+      "id": "transaction",
+      "label": "事务",
+      "relations": [
+        "snapshot/mutation"
+      ],
+      "invariants": [
+        "私有修改在提交前不可外见"
+      ]
+    },
+    {
+      "id": "mutation",
+      "label": "写集元素",
+      "relations": [
+        "transaction/relation/tuple"
+      ],
+      "invariants": [
+        "最终写集在一个提交中原子生效"
+      ]
+    },
+    {
+      "id": "journal_record",
+      "label": "日志记录",
+      "relations": [
+        "sequence/transaction"
+      ],
+      "invariants": [
+        "校验和与连续提交序列"
+      ]
+    },
+    {
+      "id": "checkpoint",
+      "label": "检查点",
+      "relations": [
+        "catalog/version/horizon"
+      ],
+      "invariants": [
+        "冻结图像与恢复前缀一致"
+      ]
+    },
+    {
+      "id": "change_page",
+      "label": "变更页",
+      "relations": [
+        "journal record/cursor"
+      ],
+      "invariants": [
+        "分页不拆分完整提交"
+      ]
+    }
+  ],
+  "state_machines": [
+    {
+      "subject": "transaction",
+      "states": [
+        "active",
+        "staged",
+        "committed",
+        "rolled_back",
+        "aborted"
+      ],
+      "transitions": [
+        "active->staged",
+        "staged->committed",
+        "active->rolled_back",
+        "staged->rolled_back",
+        "staged->aborted"
+      ],
+      "invariants": [
+        "闭合事务不再可用；失败提交丢弃整个私有写集"
+      ]
+    },
+    {
+      "subject": "version",
+      "states": [
+        "current",
+        "historical",
+        "reclaimed"
+      ],
+      "transitions": [
+        "current->historical",
+        "historical->reclaimed"
+      ],
+      "invariants": [
+        "活动读水位阻止仍可能可见的版本回收"
+      ]
+    },
+    {
+      "subject": "journal_record",
+      "states": [
+        "encoded",
+        "durable",
+        "applied",
+        "incomplete_tail",
+        "corrupt"
+      ],
+      "transitions": [
+        "encoded->durable",
+        "durable->applied",
+        "incomplete_tail->truncated"
+      ],
+      "invariants": [
+        "fsync成功后才发布内存；完整损坏帧拒绝启动"
+      ]
+    },
+    {
+      "subject": "checkpoint",
+      "states": [
+        "captured",
+        "temporary",
+        "synced",
+        "installed",
+        "restored"
+      ],
+      "transitions": [
+        "captured->temporary",
+        "temporary->synced",
+        "synced->installed",
+        "installed->restored"
+      ],
+      "invariants": [
+        "临时镜像不会覆盖已安装图像，摘要和格式在恢复前验证"
+      ]
+    },
+    {
+      "subject": "index",
+      "states": [
+        "absent",
+        "validated",
+        "durable",
+        "active",
+        "rebuilt"
+      ],
+      "transitions": [
+        "absent->validated",
+        "validated->durable",
+        "durable->active",
+        "active->rebuilt"
+      ],
+      "invariants": [
+        "唯一构建失败不发布目录；版本回收后重建候选"
+      ]
+    }
+  ],
+  "capability_families": [
+    {
+      "family": "state_machine",
+      "occupied_by": [],
+      "available": true
+    },
+    {
+      "family": "concurrency",
+      "occupied_by": [
+        "catalog-create",
+        "txn-write",
+        "snapshot-read",
+        "index-build",
+        "query-plan",
+        "sql-execute",
+        "txn-conflict",
+        "restart",
+        "checkpoint",
+        "backup-restore",
+        "changes",
+        "vacuum",
+        "transaction-close",
+        "statistics"
+      ],
+      "available": true
+    },
+    {
+      "family": "recovery_rollback",
+      "occupied_by": [
+        "catalog-create",
+        "txn-write",
+        "snapshot-read",
+        "index-build",
+        "query-plan",
+        "sql-execute",
+        "txn-conflict",
+        "restart",
+        "checkpoint",
+        "backup-restore",
+        "changes",
+        "vacuum",
+        "transaction-close",
+        "statistics"
+      ],
+      "available": true
+    },
+    {
+      "family": "batch_transaction",
+      "occupied_by": [],
+      "available": true
+    },
+    {
+      "family": "snapshot_consistency",
+      "occupied_by": [
+        "catalog-create",
+        "txn-write",
+        "snapshot-read",
+        "index-build",
+        "query-plan",
+        "sql-execute",
+        "txn-conflict",
+        "restart",
+        "checkpoint",
+        "backup-restore",
+        "changes",
+        "vacuum",
+        "transaction-close",
+        "statistics"
+      ],
+      "available": true
+    },
+    {
+      "family": "resource_lifecycle",
+      "occupied_by": [],
+      "available": true
+    },
+    {
+      "family": "export_freeze",
+      "occupied_by": [],
+      "available": true
+    },
+    {
+      "family": "error_propagation",
+      "occupied_by": [],
+      "available": true
+    },
+    {
+      "family": "lineage",
+      "occupied_by": [],
+      "available": true
+    },
+    {
+      "family": "policy_rules",
+      "occupied_by": [],
+      "available": true
+    },
+    {
+      "family": "versioning_audit",
+      "occupied_by": [],
+      "available": true
+    }
+  ],
+  "extension_seams": [
+    {
+      "id": "predicate-binding",
+      "anchor": "query.Bind",
+      "entry": "Typed predicate binding",
+      "distinct_outcome": "New expression semantics"
+    },
+    {
+      "id": "access-choice",
+      "anchor": "query.Choose",
+      "entry": "Candidate selection and snapshot recheck",
+      "distinct_outcome": "New access path"
+    },
+    {
+      "id": "scalar-types",
+      "anchor": "datum.Value and catalog.Normalize",
+      "entry": "Typed persisted scalar semantics",
+      "distinct_outcome": "Additional domain types"
+    },
+    {
+      "id": "schema-catalog",
+      "anchor": "catalog.Relation",
+      "entry": "Durable schema ownership",
+      "distinct_outcome": "Schema compatibility evolution"
+    },
+    {
+      "id": "commit-validation",
+      "anchor": "engine.Commit",
+      "entry": "Durable publish after conflicts and constraints",
+      "distinct_outcome": "Stronger transaction semantics"
+    },
+    {
+      "id": "index-definition",
+      "anchor": "catalog.Index and index.Build",
+      "entry": "Index metadata and historical membership",
+      "distinct_outcome": "New index families"
+    },
+    {
+      "id": "version-visibility",
+      "anchor": "versions.Visible",
+      "entry": "Per-key read timestamp visibility",
+      "distinct_outcome": "Alternative reader lifecycle"
+    },
+    {
+      "id": "record-format",
+      "anchor": "journal.Record and engine.apply",
+      "entry": "Ordered durable records",
+      "distinct_outcome": "New journal transport or format"
+    },
+    {
+      "id": "image-format",
+      "anchor": "snapshot.Image",
+      "entry": "Portable frozen state",
+      "distinct_outcome": "Backup representation and lifecycle"
+    },
+    {
+      "id": "retention-horizon",
+      "anchor": "engine.Vacuum",
+      "entry": "Live snapshots protect versions",
+      "distinct_outcome": "Additional retention consumers"
+    },
+    {
+      "id": "change-consumer",
+      "anchor": "engine.Changes",
+      "entry": "Complete commit cursor pages",
+      "distinct_outcome": "Independent downstream change consumer"
+    },
+    {
+      "id": "sql-grammar",
+      "anchor": "syntax.Parse",
+      "entry": "SELECT to bound query",
+      "distinct_outcome": "Relational language extensions"
+    },
+    {
+      "id": "transaction-state",
+      "anchor": "engine.Put and Commit",
+      "entry": "Private write overlay and commit",
+      "distinct_outcome": "New staged transaction operations"
+    },
+    {
+      "id": "operation-facts",
+      "anchor": "engine.Stats",
+      "entry": "Query and resource facts",
+      "distinct_outcome": "Database resource control"
+    }
+  ],
+  "tension_points": [
+    {
+      "workflow_id": "catalog-create",
+      "description": "typed relation admission must coordinate owned state with invalid schema leaves no relation",
+      "observable_failure": "invalid schema leaves no relation"
+    },
+    {
+      "workflow_id": "txn-write",
+      "description": "snapshot transaction staging and commit must coordinate owned state with first committer wins; unique validation against current full resulting state",
+      "observable_failure": "first committer wins; unique validation against current full resulting state"
+    },
+    {
+      "workflow_id": "snapshot-read",
+      "description": "repeatable reads and read own writes must coordinate owned state with active transactions retain versions; unsupported timestamp rejected",
+      "observable_failure": "active transactions retain versions; unsupported timestamp rejected"
+    },
+    {
+      "workflow_id": "index-build",
+      "description": "single-column unique and ordered secondary index must coordinate owned state with failed unique build leaves no catalog entry",
+      "observable_failure": "failed unique build leaves no catalog entry"
+    },
+    {
+      "workflow_id": "query-plan",
+      "description": "indexed candidates and residual selection must coordinate owned state with historical snapshot always rechecks visible versions",
+      "observable_failure": "historical snapshot always rechecks visible versions"
+    },
+    {
+      "workflow_id": "sql-execute",
+      "description": "SELECT SQL subset and aggregates must coordinate owned state with syntax errors cannot partially execute; SQL and structured query agree",
+      "observable_failure": "syntax errors cannot partially execute; SQL and structured query agree"
+    },
+    {
+      "workflow_id": "txn-conflict",
+      "description": "concurrent writes and atomic abort must coordinate owned state with no partial commit or sequence advance on conflict",
+      "observable_failure": "no partial commit or sequence advance on conflict"
+    },
+    {
+      "workflow_id": "restart",
+      "description": "checkpoint plus journal replay must coordinate owned state with incomplete final frame truncated; complete corruption fails closed",
+      "observable_failure": "incomplete final frame truncated; complete corruption fails closed"
+    },
+    {
+      "workflow_id": "checkpoint",
+      "description": "durable consistent image must coordinate owned state with previous image survives failed replacement",
+      "observable_failure": "previous image survives failed replacement"
+    },
+    {
+      "workflow_id": "backup-restore",
+      "description": "portable export and empty-directory restore must coordinate owned state with digest and format validated before startup publishes state",
+      "observable_failure": "digest and format validated before startup publishes state"
+    },
+    {
+      "workflow_id": "changes",
+      "description": "commit-bounded change feed must coordinate owned state with no split transaction at page boundary; watermark is last delivered sequence",
+      "observable_failure": "no split transaction at page boundary; watermark is last delivered sequence"
+    },
+    {
+      "workflow_id": "vacuum",
+      "description": "snapshot protected version reclamation must coordinate owned state with lowest active read timestamp limits pruning",
+      "observable_failure": "lowest active read timestamp limits pruning"
+    },
+    {
+      "workflow_id": "transaction-close",
+      "description": "rollback and closed session behavior must coordinate owned state with discard private writes, retain no pins",
+      "observable_failure": "discard private writes, retain no pins"
+    },
+    {
+      "workflow_id": "statistics",
+      "description": "query execution facts and database resource state must coordinate owned state with candidates vs scanned vs returned have distinct meanings",
+      "observable_failure": "candidates vs scanned vs returned have distinct meanings"
+    }
+  ],
+  "prompt_anchors": [
+    {
+      "id": "功能开发-serializable",
+      "task_type": "功能开发",
+      "capability_family": "读写依赖与写偏差",
+      "subject": "serializable",
+      "state": "snapshot-read",
+      "invariant": "active transactions retain versions; unsupported timestamp rejected",
+      "observable": "读写依赖与写偏差的公开结果可通过POST /query with transaction or at核对",
+      "primary_mechanism": "concurrency",
+      "workflow_ids": [
+        "snapshot-read"
+      ],
+      "source_anchors": [
+        "internal/engine/read.go",
+        "internal/versions/store.go"
+      ],
+      "existing_touch_points": {
+        "files": [
+          "internal/engine/read.go",
+          "internal/versions/store.go"
+        ],
+        "functions": [
+          "Query",
+          "Visible"
+        ]
+      },
+      "extension_seam_id": "commit-validation"
+    },
+    {
+      "id": "功能开发-compound-index",
+      "task_type": "功能开发",
+      "capability_family": "多列字典序与前缀范围",
+      "subject": "compound-index",
+      "state": "query-plan",
+      "invariant": "historical snapshot always rechecks visible versions",
+      "observable": "多列字典序与前缀范围的公开结果可通过POST /query with where核对",
+      "primary_mechanism": "ranking_reorder",
+      "workflow_ids": [
+        "query-plan"
+      ],
+      "source_anchors": [
+        "internal/query/plan.go",
+        "internal/engine/read.go",
+        "internal/query/execute.go"
+      ],
+      "existing_touch_points": {
+        "files": [
+          "internal/query/plan.go",
+          "internal/engine/read.go",
+          "internal/query/execute.go"
+        ],
+        "functions": [
+          "Choose",
+          "Query",
+          "Execute"
+        ]
+      },
+      "extension_seam_id": "index-definition"
+    },
+    {
+      "id": "功能开发-online-index",
+      "task_type": "功能开发",
+      "capability_family": "提交并行时的索引生效边界",
+      "subject": "online-index",
+      "state": "index-build",
+      "invariant": "failed unique build leaves no catalog entry",
+      "observable": "提交并行时的索引生效边界的公开结果可通过POST /indexes核对",
+      "primary_mechanism": "concurrency",
+      "workflow_ids": [
+        "index-build"
+      ],
+      "source_anchors": [
+        "internal/engine/constraints.go",
+        "internal/index/registry.go"
+      ],
+      "existing_touch_points": {
+        "files": [
+          "internal/engine/constraints.go",
+          "internal/index/registry.go"
+        ],
+        "functions": [
+          "CreateIndex",
+          "Build"
+        ]
+      },
+      "extension_seam_id": "index-definition"
+    },
+    {
+      "id": "功能开发-foreign-key",
+      "task_type": "功能开发",
+      "capability_family": "跨关系引用与删除约束",
+      "subject": "foreign-key",
+      "state": "txn-write",
+      "invariant": "first committer wins; unique validation against current full resulting state",
+      "observable": "跨关系引用与删除约束的公开结果可通过POST /transactions/{tx}/put then /commit核对",
+      "primary_mechanism": "lineage",
+      "workflow_ids": [
+        "txn-write"
+      ],
+      "source_anchors": [
+        "internal/engine/transaction.go",
+        "internal/journal/wal.go",
+        "internal/catalog/schema.go"
+      ],
+      "existing_touch_points": {
+        "files": [
+          "internal/engine/transaction.go",
+          "internal/journal/wal.go",
+          "internal/catalog/schema.go"
+        ],
+        "functions": [
+          "Commit",
+          "Append",
+          "Normalize"
+        ]
+      },
+      "extension_seam_id": "commit-validation"
+    },
+    {
+      "id": "功能开发-point-in-time",
+      "task_type": "功能开发",
+      "capability_family": "提交前缀重放与恢复目标",
+      "subject": "point-in-time",
+      "state": "restart",
+      "invariant": "incomplete final frame truncated; complete corruption fails closed",
+      "observable": "提交前缀重放与恢复目标的公开结果可通过laminad startup核对",
+      "primary_mechanism": "recovery_rollback",
+      "workflow_ids": [
+        "restart"
+      ],
+      "source_anchors": [
+        "internal/journal/wal.go",
+        "internal/engine/database.go",
+        "internal/engine/replay.go"
+      ],
+      "existing_touch_points": {
+        "files": [
+          "internal/journal/wal.go",
+          "internal/engine/database.go",
+          "internal/engine/replay.go"
+        ],
+        "functions": [
+          "recover",
+          "Open",
+          "apply"
+        ]
+      },
+      "extension_seam_id": "record-format"
+    },
+    {
+      "id": "功能开发-replication",
+      "task_type": "功能开发",
+      "capability_family": "提交连续性与独立消费者",
+      "subject": "replication",
+      "state": "changes",
+      "invariant": "no split transaction at page boundary; watermark is last delivered sequence",
+      "observable": "提交连续性与独立消费者的公开结果可通过GET /changes核对",
+      "primary_mechanism": "lineage",
+      "workflow_ids": [
+        "changes"
+      ],
+      "source_anchors": [
+        "internal/engine/changes.go",
+        "internal/journal/record.go",
+        "internal/journal/wal.go"
+      ],
+      "existing_touch_points": {
+        "files": [
+          "internal/engine/changes.go",
+          "internal/journal/record.go",
+          "internal/journal/wal.go"
+        ],
+        "functions": [
+          "Changes",
+          "Append"
+        ]
+      },
+      "extension_seam_id": "change-consumer"
+    },
+    {
+      "id": "功能开发-savepoints",
+      "task_type": "功能开发",
+      "capability_family": "私有写集的局部回撤",
+      "subject": "savepoints",
+      "state": "transaction-close",
+      "invariant": "discard private writes, retain no pins",
+      "observable": "私有写集的局部回撤的公开结果可通过POST /transactions/{tx}/rollback核对",
+      "primary_mechanism": "state_machine",
+      "workflow_ids": [
+        "transaction-close"
+      ],
+      "source_anchors": [
+        "internal/engine/transaction.go",
+        "internal/engine/read.go"
+      ],
+      "existing_touch_points": {
+        "files": [
+          "internal/engine/transaction.go",
+          "internal/engine/read.go"
+        ],
+        "functions": [
+          "Rollback",
+          "Begin",
+          "Query"
+        ]
+      },
+      "extension_seam_id": "transaction-state"
+    },
+    {
+      "id": "功能开发-prepared-statements",
+      "task_type": "功能开发",
+      "capability_family": "语义绑定与执行期目录",
+      "subject": "prepared-statements",
+      "state": "sql-execute",
+      "invariant": "syntax errors cannot partially execute; SQL and structured query agree",
+      "observable": "语义绑定与执行期目录的公开结果可通过POST /sql核对",
+      "primary_mechanism": "resource_lifecycle",
+      "workflow_ids": [
+        "sql-execute"
+      ],
+      "source_anchors": [
+        "internal/syntax/parser.go",
+        "internal/query/bind.go",
+        "internal/query/execute.go"
+      ],
+      "existing_touch_points": {
+        "files": [
+          "internal/syntax/parser.go",
+          "internal/query/bind.go",
+          "internal/query/execute.go"
+        ],
+        "functions": [
+          "Parse",
+          "Bind",
+          "Execute"
+        ]
+      },
+      "extension_seam_id": "sql-grammar"
+    },
+    {
+      "id": "功能开发-schema-evolution",
+      "task_type": "功能开发",
+      "capability_family": "历史行解释与新目录版本",
+      "subject": "schema-evolution",
+      "state": "catalog-create",
+      "invariant": "invalid schema leaves no relation",
+      "observable": "历史行解释与新目录版本的公开结果可通过POST /relations核对",
+      "primary_mechanism": "versioning_audit",
+      "workflow_ids": [
+        "catalog-create"
+      ],
+      "source_anchors": [
+        "internal/catalog/schema.go",
+        "internal/engine/constraints.go"
+      ],
+      "existing_touch_points": {
+        "files": [
+          "internal/catalog/schema.go",
+          "internal/engine/constraints.go"
+        ],
+        "functions": [
+          "Normalize",
+          "CreateRelation"
+        ]
+      },
+      "extension_seam_id": "schema-catalog"
+    },
+    {
+      "id": "功能开发-joins",
+      "task_type": "功能开发",
+      "capability_family": "两个输入快照与组合结果",
+      "subject": "joins",
+      "state": "sql-execute",
+      "invariant": "syntax errors cannot partially execute; SQL and structured query agree",
+      "observable": "两个输入快照与组合结果的公开结果可通过POST /sql核对",
+      "primary_mechanism": "snapshot_consistency",
+      "workflow_ids": [
+        "sql-execute"
+      ],
+      "source_anchors": [
+        "internal/syntax/parser.go",
+        "internal/query/bind.go",
+        "internal/query/execute.go"
+      ],
+      "existing_touch_points": {
+        "files": [
+          "internal/syntax/parser.go",
+          "internal/query/bind.go",
+          "internal/query/execute.go"
+        ],
+        "functions": [
+          "Parse",
+          "Bind",
+          "Execute"
+        ]
+      },
+      "extension_seam_id": "sql-grammar"
+    },
+    {
+      "id": "功能开发-external-sort",
+      "task_type": "功能开发",
+      "capability_family": "有界排序与临时资源清理",
+      "subject": "external-sort",
+      "state": "query-plan",
+      "invariant": "historical snapshot always rechecks visible versions",
+      "observable": "有界排序与临时资源清理的公开结果可通过POST /query with where核对",
+      "primary_mechanism": "capacity",
+      "workflow_ids": [
+        "query-plan"
+      ],
+      "source_anchors": [
+        "internal/query/plan.go",
+        "internal/engine/read.go",
+        "internal/query/execute.go"
+      ],
+      "existing_touch_points": {
+        "files": [
+          "internal/query/plan.go",
+          "internal/engine/read.go",
+          "internal/query/execute.go"
+        ],
+        "functions": [
+          "Choose",
+          "Query",
+          "Execute"
+        ]
+      },
+      "extension_seam_id": "access-choice"
+    },
+    {
+      "id": "功能开发-journal-retention",
+      "task_type": "功能开发",
+      "capability_family": "恢复基点与变更消费者追赶",
+      "subject": "journal-retention",
+      "state": "changes",
+      "invariant": "no split transaction at page boundary; watermark is last delivered sequence",
+      "observable": "恢复基点与变更消费者追赶的公开结果可通过GET /changes核对",
+      "primary_mechanism": "resource_lifecycle",
+      "workflow_ids": [
+        "changes"
+      ],
+      "source_anchors": [
+        "internal/engine/changes.go",
+        "internal/journal/record.go",
+        "internal/journal/wal.go"
+      ],
+      "existing_touch_points": {
+        "files": [
+          "internal/engine/changes.go",
+          "internal/journal/record.go",
+          "internal/journal/wal.go"
+        ],
+        "functions": [
+          "Changes",
+          "Append"
+        ]
+      },
+      "extension_seam_id": "record-format"
+    },
+    {
+      "id": "功能开发-incremental-backup",
+      "task_type": "功能开发",
+      "capability_family": "备份基点与提交后缀闭包",
+      "subject": "incremental-backup",
+      "state": "backup-restore",
+      "invariant": "digest and format validated before startup publishes state",
+      "observable": "备份基点与提交后缀闭包的公开结果可通过GET /backup; laminad -restore核对",
+      "primary_mechanism": "lineage",
+      "workflow_ids": [
+        "backup-restore"
+      ],
+      "source_anchors": [
+        "internal/engine/maintenance.go",
+        "internal/snapshot/image.go"
+      ],
+      "existing_touch_points": {
+        "files": [
+          "internal/engine/maintenance.go",
+          "internal/snapshot/image.go"
+        ],
+        "functions": [
+          "Restore",
+          "Decode",
+          "Validate"
+        ]
+      },
+      "extension_seam_id": "image-format"
+    },
+    {
+      "id": "功能开发-cursor-snapshot",
+      "task_type": "功能开发",
+      "capability_family": "跨请求遍历的快照保护",
+      "subject": "cursor-snapshot",
+      "state": "snapshot-read",
+      "invariant": "active transactions retain versions; unsupported timestamp rejected",
+      "observable": "跨请求遍历的快照保护的公开结果可通过POST /query with transaction or at核对",
+      "primary_mechanism": "resource_lifecycle",
+      "workflow_ids": [
+        "snapshot-read"
+      ],
+      "source_anchors": [
+        "internal/engine/read.go",
+        "internal/versions/store.go"
+      ],
+      "existing_touch_points": {
+        "files": [
+          "internal/engine/read.go",
+          "internal/versions/store.go"
+        ],
+        "functions": [
+          "Query",
+          "Visible"
+        ]
+      },
+      "extension_seam_id": "version-visibility"
+    },
+    {
+      "id": "功能开发-partial-index",
+      "task_type": "功能开发",
+      "capability_family": "索引资格与写入变化",
+      "subject": "partial-index",
+      "state": "index-build",
+      "invariant": "failed unique build leaves no catalog entry",
+      "observable": "索引资格与写入变化的公开结果可通过POST /indexes核对",
+      "primary_mechanism": "policy_rules",
+      "workflow_ids": [
+        "index-build"
+      ],
+      "source_anchors": [
+        "internal/engine/constraints.go",
+        "internal/index/registry.go"
+      ],
+      "existing_touch_points": {
+        "files": [
+          "internal/engine/constraints.go",
+          "internal/index/registry.go"
+        ],
+        "functions": [
+          "CreateIndex",
+          "Build"
+        ]
+      },
+      "extension_seam_id": "index-definition"
+    },
+    {
+      "id": "功能开发-bulk-import",
+      "task_type": "功能开发",
+      "capability_family": "流式导入与事务原子边界",
+      "subject": "bulk-import",
+      "state": "txn-write",
+      "invariant": "first committer wins; unique validation against current full resulting state",
+      "observable": "流式导入与事务原子边界的公开结果可通过POST /transactions/{tx}/put then /commit核对",
+      "primary_mechanism": "batch_transaction",
+      "workflow_ids": [
+        "txn-write"
+      ],
+      "source_anchors": [
+        "internal/engine/transaction.go",
+        "internal/journal/wal.go",
+        "internal/catalog/schema.go"
+      ],
+      "existing_touch_points": {
+        "files": [
+          "internal/engine/transaction.go",
+          "internal/journal/wal.go",
+          "internal/catalog/schema.go"
+        ],
+        "functions": [
+          "Commit",
+          "Append",
+          "Normalize"
+        ]
+      },
+      "extension_seam_id": "transaction-state"
+    },
+    {
+      "id": "功能开发-commit-idempotency",
+      "task_type": "功能开发",
+      "capability_family": "不确定提交后的请求身份",
+      "subject": "commit-idempotency",
+      "state": "txn-conflict",
+      "invariant": "no partial commit or sequence advance on conflict",
+      "observable": "不确定提交后的请求身份的公开结果可通过POST /transactions/{tx}/commit核对",
+      "primary_mechanism": "idempotency",
+      "workflow_ids": [
+        "txn-conflict"
+      ],
+      "source_anchors": [
+        "internal/engine/transaction.go",
+        "internal/engine/constraints.go",
+        "internal/versions/store.go"
+      ],
+      "existing_touch_points": {
+        "files": [
+          "internal/engine/transaction.go",
+          "internal/engine/constraints.go",
+          "internal/versions/store.go"
+        ],
+        "functions": [
+          "Commit",
+          "unique",
+          "Latest"
+        ]
+      },
+      "extension_seam_id": "commit-validation"
+    },
+    {
+      "id": "功能开发-check-constraint",
+      "task_type": "功能开发",
+      "capability_family": "表达式未知值与最终行校验",
+      "subject": "check-constraint",
+      "state": "txn-write",
+      "invariant": "first committer wins; unique validation against current full resulting state",
+      "observable": "表达式未知值与最终行校验的公开结果可通过POST /transactions/{tx}/put then /commit核对",
+      "primary_mechanism": "policy_rules",
+      "workflow_ids": [
+        "txn-write"
+      ],
+      "source_anchors": [
+        "internal/engine/transaction.go",
+        "internal/journal/wal.go",
+        "internal/catalog/schema.go"
+      ],
+      "existing_touch_points": {
+        "files": [
+          "internal/engine/transaction.go",
+          "internal/journal/wal.go",
+          "internal/catalog/schema.go"
+        ],
+        "functions": [
+          "Commit",
+          "Append",
+          "Normalize"
+        ]
+      },
+      "extension_seam_id": "predicate-binding"
+    },
+    {
+      "id": "功能开发-row-expiry",
+      "task_type": "功能开发",
+      "capability_family": "可重现过期时点与历史读",
+      "subject": "row-expiry",
+      "state": "vacuum",
+      "invariant": "lowest active read timestamp limits pruning",
+      "observable": "可重现过期时点与历史读的公开结果可通过POST /vacuum核对",
+      "primary_mechanism": "time_semantics",
+      "workflow_ids": [
+        "vacuum"
+      ],
+      "source_anchors": [
+        "internal/engine/maintenance.go",
+        "internal/versions/vacuum.go",
+        "internal/index/registry.go"
+      ],
+      "existing_touch_points": {
+        "files": [
+          "internal/engine/maintenance.go",
+          "internal/versions/vacuum.go",
+          "internal/index/registry.go"
+        ],
+        "functions": [
+          "Vacuum",
+          "Build"
+        ]
+      },
+      "extension_seam_id": "retention-horizon"
+    },
+    {
+      "id": "功能开发-histogram-statistics",
+      "task_type": "功能开发",
+      "capability_family": "数据分布与访问代价估计",
+      "subject": "histogram-statistics",
+      "state": "query-plan",
+      "invariant": "historical snapshot always rechecks visible versions",
+      "observable": "数据分布与访问代价估计的公开结果可通过POST /query with where核对",
+      "primary_mechanism": "ranking_reorder",
+      "workflow_ids": [
+        "query-plan"
+      ],
+      "source_anchors": [
+        "internal/query/plan.go",
+        "internal/engine/read.go",
+        "internal/query/execute.go"
+      ],
+      "existing_touch_points": {
+        "files": [
+          "internal/query/plan.go",
+          "internal/engine/read.go",
+          "internal/query/execute.go"
+        ],
+        "functions": [
+          "Choose",
+          "Query",
+          "Execute"
+        ]
+      },
+      "extension_seam_id": "access-choice"
+    },
+    {
+      "id": "功能开发-grouped-aggregate",
+      "task_type": "功能开发",
+      "capability_family": "分组状态与有界输出",
+      "subject": "grouped-aggregate",
+      "state": "sql-execute",
+      "invariant": "syntax errors cannot partially execute; SQL and structured query agree",
+      "observable": "分组状态与有界输出的公开结果可通过POST /sql核对",
+      "primary_mechanism": "capacity",
+      "workflow_ids": [
+        "sql-execute"
+      ],
+      "source_anchors": [
+        "internal/syntax/parser.go",
+        "internal/query/bind.go",
+        "internal/query/execute.go"
+      ],
+      "existing_touch_points": {
+        "files": [
+          "internal/syntax/parser.go",
+          "internal/query/bind.go",
+          "internal/query/execute.go"
+        ],
+        "functions": [
+          "Parse",
+          "Bind",
+          "Execute"
+        ]
+      },
+      "extension_seam_id": "sql-grammar"
+    },
+    {
+      "id": "功能开发-materialized-view",
+      "task_type": "功能开发",
+      "capability_family": "派生行与源提交原子维护",
+      "subject": "materialized-view",
+      "state": "txn-write",
+      "invariant": "first committer wins; unique validation against current full resulting state",
+      "observable": "派生行与源提交原子维护的公开结果可通过POST /transactions/{tx}/put then /commit核对",
+      "primary_mechanism": "batch_transaction",
+      "workflow_ids": [
+        "txn-write"
+      ],
+      "source_anchors": [
+        "internal/engine/transaction.go",
+        "internal/journal/wal.go",
+        "internal/catalog/schema.go"
+      ],
+      "existing_touch_points": {
+        "files": [
+          "internal/engine/transaction.go",
+          "internal/journal/wal.go",
+          "internal/catalog/schema.go"
+        ],
+        "functions": [
+          "Commit",
+          "Append",
+          "Normalize"
+        ]
+      },
+      "extension_seam_id": "commit-validation"
+    },
+    {
+      "id": "功能开发-large-values",
+      "task_type": "功能开发",
+      "capability_family": "外置值引用与版本回收",
+      "subject": "large-values",
+      "state": "vacuum",
+      "invariant": "lowest active read timestamp limits pruning",
+      "observable": "外置值引用与版本回收的公开结果可通过POST /vacuum核对",
+      "primary_mechanism": "resource_lifecycle",
+      "workflow_ids": [
+        "vacuum"
+      ],
+      "source_anchors": [
+        "internal/engine/maintenance.go",
+        "internal/versions/vacuum.go",
+        "internal/index/registry.go"
+      ],
+      "existing_touch_points": {
+        "files": [
+          "internal/engine/maintenance.go",
+          "internal/versions/vacuum.go",
+          "internal/index/registry.go"
+        ],
+        "functions": [
+          "Vacuum",
+          "Build"
+        ]
+      },
+      "extension_seam_id": "scalar-types"
+    },
+    {
+      "id": "功能开发-read-replica",
+      "task_type": "功能开发",
+      "capability_family": "副本可读水位与恢复",
+      "subject": "read-replica",
+      "state": "changes",
+      "invariant": "no split transaction at page boundary; watermark is last delivered sequence",
+      "observable": "副本可读水位与恢复的公开结果可通过GET /changes核对",
+      "primary_mechanism": "snapshot_consistency",
+      "workflow_ids": [
+        "changes"
+      ],
+      "source_anchors": [
+        "internal/engine/changes.go",
+        "internal/journal/record.go",
+        "internal/journal/wal.go"
+      ],
+      "existing_touch_points": {
+        "files": [
+          "internal/engine/changes.go",
+          "internal/journal/record.go",
+          "internal/journal/wal.go"
+        ],
+        "functions": [
+          "Changes",
+          "Append"
+        ]
+      },
+      "extension_seam_id": "record-format"
+    },
+    {
+      "id": "功能开发-encrypted-backup",
+      "task_type": "功能开发",
+      "capability_family": "密文完整性与密钥轮换恢复",
+      "subject": "encrypted-backup",
+      "state": "backup-restore",
+      "invariant": "digest and format validated before startup publishes state",
+      "observable": "密文完整性与密钥轮换恢复的公开结果可通过GET /backup; laminad -restore核对",
+      "primary_mechanism": "recovery_rollback",
+      "workflow_ids": [
+        "backup-restore"
+      ],
+      "source_anchors": [
+        "internal/engine/maintenance.go",
+        "internal/snapshot/image.go"
+      ],
+      "existing_touch_points": {
+        "files": [
+          "internal/engine/maintenance.go",
+          "internal/snapshot/image.go"
+        ],
+        "functions": [
+          "Restore",
+          "Decode",
+          "Validate"
+        ]
+      },
+      "extension_seam_id": "image-format"
+    },
+    {
+      "id": "功能优化-overlay-index",
+      "task_type": "功能优化",
+      "capability_family": "私有写集与索引候选合并",
+      "subject": "overlay-index",
+      "state": "snapshot-read",
+      "invariant": "active transactions retain versions; unsupported timestamp rejected",
+      "observable": "私有写集与索引候选合并的公开结果可通过POST /query with transaction or at核对",
+      "primary_mechanism": "snapshot_consistency",
+      "workflow_ids": [
+        "snapshot-read"
+      ],
+      "source_anchors": [
+        "internal/engine/read.go",
+        "internal/versions/store.go"
+      ],
+      "existing_touch_points": {
+        "files": [
+          "internal/engine/read.go",
+          "internal/versions/store.go"
+        ],
+        "functions": [
+          "Query",
+          "Visible"
+        ]
+      }
+    },
+    {
+      "id": "功能优化-null-ordering",
+      "task_type": "功能优化",
+      "capability_family": "双查询入口的空值排序约定",
+      "subject": "null-ordering",
+      "state": "sql-execute",
+      "invariant": "syntax errors cannot partially execute; SQL and structured query agree",
+      "observable": "双查询入口的空值排序约定的公开结果可通过POST /sql核对",
+      "primary_mechanism": "policy_rules",
+      "workflow_ids": [
+        "sql-execute"
+      ],
+      "source_anchors": [
+        "internal/syntax/parser.go",
+        "internal/query/bind.go",
+        "internal/query/execute.go"
+      ],
+      "existing_touch_points": {
+        "files": [
+          "internal/syntax/parser.go",
+          "internal/query/bind.go",
+          "internal/query/execute.go"
+        ],
+        "functions": [
+          "Parse",
+          "Bind",
+          "Execute"
+        ]
+      }
+    },
+    {
+      "id": "功能优化-range-combination",
+      "task_type": "功能优化",
+      "capability_family": "多重范围约束与历史候选",
+      "subject": "range-combination",
+      "state": "query-plan",
+      "invariant": "historical snapshot always rechecks visible versions",
+      "observable": "多重范围约束与历史候选的公开结果可通过POST /query with where核对",
+      "primary_mechanism": "ranking_reorder",
+      "workflow_ids": [
+        "query-plan"
+      ],
+      "source_anchors": [
+        "internal/query/plan.go",
+        "internal/engine/read.go",
+        "internal/query/execute.go"
+      ],
+      "existing_touch_points": {
+        "files": [
+          "internal/query/plan.go",
+          "internal/engine/read.go",
+          "internal/query/execute.go"
+        ],
+        "functions": [
+          "Choose",
+          "Query",
+          "Execute"
+        ]
+      }
+    },
+    {
+      "id": "功能优化-index-intersection",
+      "task_type": "功能优化",
+      "capability_family": "多谓词候选交集的代价",
+      "subject": "index-intersection",
+      "state": "query-plan",
+      "invariant": "historical snapshot always rechecks visible versions",
+      "observable": "多谓词候选交集的代价的公开结果可通过POST /query with where核对",
+      "primary_mechanism": "capacity",
+      "workflow_ids": [
+        "query-plan"
+      ],
+      "source_anchors": [
+        "internal/query/plan.go",
+        "internal/engine/read.go",
+        "internal/query/execute.go"
+      ],
+      "existing_touch_points": {
+        "files": [
+          "internal/query/plan.go",
+          "internal/engine/read.go",
+          "internal/query/execute.go"
+        ],
+        "functions": [
+          "Choose",
+          "Query",
+          "Execute"
+        ]
+      }
+    },
+    {
+      "id": "功能优化-write-admission",
+      "task_type": "功能优化",
+      "capability_family": "事务写集累计字节预算",
+      "subject": "write-admission",
+      "state": "txn-write",
+      "invariant": "first committer wins; unique validation against current full resulting state",
+      "observable": "事务写集累计字节预算的公开结果可通过POST /transactions/{tx}/put then /commit核对",
+      "primary_mechanism": "capacity",
+      "workflow_ids": [
+        "txn-write"
+      ],
+      "source_anchors": [
+        "internal/engine/transaction.go",
+        "internal/journal/wal.go",
+        "internal/catalog/schema.go"
+      ],
+      "existing_touch_points": {
+        "files": [
+          "internal/engine/transaction.go",
+          "internal/journal/wal.go",
+          "internal/catalog/schema.go"
+        ],
+        "functions": [
+          "Commit",
+          "Append",
+          "Normalize"
+        ]
+      }
+    },
+    {
+      "id": "功能优化-conflict-detail",
+      "task_type": "功能优化",
+      "capability_family": "冲突原因与闭合事务重试上下文",
+      "subject": "conflict-detail",
+      "state": "txn-conflict",
+      "invariant": "no partial commit or sequence advance on conflict",
+      "observable": "冲突原因与闭合事务重试上下文的公开结果可通过POST /transactions/{tx}/commit核对",
+      "primary_mechanism": "error_propagation",
+      "workflow_ids": [
+        "txn-conflict"
+      ],
+      "source_anchors": [
+        "internal/engine/transaction.go",
+        "internal/engine/constraints.go",
+        "internal/versions/store.go"
+      ],
+      "existing_touch_points": {
+        "files": [
+          "internal/engine/transaction.go",
+          "internal/engine/constraints.go",
+          "internal/versions/store.go"
+        ],
+        "functions": [
+          "Commit",
+          "unique",
+          "Latest"
+        ]
+      }
+    },
+    {
+      "id": "功能优化-unique-cycle",
+      "task_type": "功能优化",
+      "capability_family": "多个唯一键置换的私有可用性",
+      "subject": "unique-cycle",
+      "state": "index-build",
+      "invariant": "failed unique build leaves no catalog entry",
+      "observable": "多个唯一键置换的私有可用性的公开结果可通过POST /indexes核对",
+      "primary_mechanism": "batch_transaction",
+      "workflow_ids": [
+        "index-build"
+      ],
+      "source_anchors": [
+        "internal/engine/constraints.go",
+        "internal/index/registry.go"
+      ],
+      "existing_touch_points": {
+        "files": [
+          "internal/engine/constraints.go",
+          "internal/index/registry.go"
+        ],
+        "functions": [
+          "CreateIndex",
+          "Build"
+        ]
+      }
+    },
+    {
+      "id": "功能优化-change-byte-page",
+      "task_type": "功能优化",
+      "capability_family": "超大提交与变更页软硬预算",
+      "subject": "change-byte-page",
+      "state": "changes",
+      "invariant": "no split transaction at page boundary; watermark is last delivered sequence",
+      "observable": "超大提交与变更页软硬预算的公开结果可通过GET /changes核对",
+      "primary_mechanism": "batch_transaction",
+      "workflow_ids": [
+        "changes"
+      ],
+      "source_anchors": [
+        "internal/engine/changes.go",
+        "internal/journal/record.go",
+        "internal/journal/wal.go"
+      ],
+      "existing_touch_points": {
+        "files": [
+          "internal/engine/changes.go",
+          "internal/journal/record.go",
+          "internal/journal/wal.go"
+        ],
+        "functions": [
+          "Changes",
+          "Append"
+        ]
+      }
+    },
+    {
+      "id": "功能优化-checkpoint-concurrency",
+      "task_type": "功能优化",
+      "capability_family": "冻结图像期间继续提交",
+      "subject": "checkpoint-concurrency",
+      "state": "checkpoint",
+      "invariant": "previous image survives failed replacement",
+      "observable": "冻结图像期间继续提交的公开结果可通过POST /checkpoint核对",
+      "primary_mechanism": "concurrency",
+      "workflow_ids": [
+        "checkpoint"
+      ],
+      "source_anchors": [
+        "internal/engine/maintenance.go",
+        "internal/snapshot/atomic.go"
+      ],
+      "existing_touch_points": {
+        "files": [
+          "internal/engine/maintenance.go",
+          "internal/snapshot/atomic.go"
+        ],
+        "functions": [
+          "Checkpoint",
+          "Write",
+          "Atomic"
+        ]
+      }
+    },
+    {
+      "id": "功能优化-backup-streaming",
+      "task_type": "功能优化",
+      "capability_family": "冻结备份的内存生命周期",
+      "subject": "backup-streaming",
+      "state": "backup-restore",
+      "invariant": "digest and format validated before startup publishes state",
+      "observable": "冻结备份的内存生命周期的公开结果可通过GET /backup; laminad -restore核对",
+      "primary_mechanism": "export_freeze",
+      "workflow_ids": [
+        "backup-restore"
+      ],
+      "source_anchors": [
+        "internal/engine/maintenance.go",
+        "internal/snapshot/image.go"
+      ],
+      "existing_touch_points": {
+        "files": [
+          "internal/engine/maintenance.go",
+          "internal/snapshot/image.go"
+        ],
+        "functions": [
+          "Restore",
+          "Decode",
+          "Validate"
+        ]
+      }
+    },
+    {
+      "id": "功能优化-vacuum-progress",
+      "task_type": "功能优化",
+      "capability_family": "被活动快照阻挡后的回收推进",
+      "subject": "vacuum-progress",
+      "state": "vacuum",
+      "invariant": "lowest active read timestamp limits pruning",
+      "observable": "被活动快照阻挡后的回收推进的公开结果可通过POST /vacuum核对",
+      "primary_mechanism": "resource_lifecycle",
+      "workflow_ids": [
+        "vacuum"
+      ],
+      "source_anchors": [
+        "internal/engine/maintenance.go",
+        "internal/versions/vacuum.go",
+        "internal/index/registry.go"
+      ],
+      "existing_touch_points": {
+        "files": [
+          "internal/engine/maintenance.go",
+          "internal/versions/vacuum.go",
+          "internal/index/registry.go"
+        ],
+        "functions": [
+          "Vacuum",
+          "Build"
+        ]
+      }
+    },
+    {
+      "id": "功能优化-explain-execution",
+      "task_type": "功能优化",
+      "capability_family": "候选膨胀与真实过滤代价",
+      "subject": "explain-execution",
+      "state": "statistics",
+      "invariant": "candidates vs scanned vs returned have distinct meanings",
+      "observable": "候选膨胀与真实过滤代价的公开结果可通过GET /stats and POST /query核对",
+      "primary_mechanism": "versioning_audit",
+      "workflow_ids": [
+        "statistics"
+      ],
+      "source_anchors": [
+        "internal/engine/stats.go",
+        "internal/query/execute.go"
+      ],
+      "existing_touch_points": {
+        "files": [
+          "internal/engine/stats.go",
+          "internal/query/execute.go"
+        ],
+        "functions": [
+          "Stats",
+          "Execute"
+        ]
+      }
+    },
+    {
+      "id": "功能优化-sql-diagnostics",
+      "task_type": "功能优化",
+      "capability_family": "标识符与字符串错误定位",
+      "subject": "sql-diagnostics",
+      "state": "sql-execute",
+      "invariant": "syntax errors cannot partially execute; SQL and structured query agree",
+      "observable": "标识符与字符串错误定位的公开结果可通过POST /sql核对",
+      "primary_mechanism": "error_propagation",
+      "workflow_ids": [
+        "sql-execute"
+      ],
+      "source_anchors": [
+        "internal/syntax/parser.go",
+        "internal/query/bind.go",
+        "internal/query/execute.go"
+      ],
+      "existing_touch_points": {
+        "files": [
+          "internal/syntax/parser.go",
+          "internal/query/bind.go",
+          "internal/query/execute.go"
+        ],
+        "functions": [
+          "Parse",
+          "Bind",
+          "Execute"
+        ]
+      }
+    },
+    {
+      "id": "功能优化-transaction-expiry",
+      "task_type": "功能优化",
+      "capability_family": "闲置会话与活跃长读区分",
+      "subject": "transaction-expiry",
+      "state": "transaction-close",
+      "invariant": "discard private writes, retain no pins",
+      "observable": "闲置会话与活跃长读区分的公开结果可通过POST /transactions/{tx}/rollback核对",
+      "primary_mechanism": "time_semantics",
+      "workflow_ids": [
+        "transaction-close"
+      ],
+      "source_anchors": [
+        "internal/engine/transaction.go",
+        "internal/engine/read.go"
+      ],
+      "existing_touch_points": {
+        "files": [
+          "internal/engine/transaction.go",
+          "internal/engine/read.go"
+        ],
+        "functions": [
+          "Rollback",
+          "Begin",
+          "Query"
+        ]
+      }
+    },
+    {
+      "id": "功能优化-retention-policy",
+      "task_type": "功能优化",
+      "capability_family": "用户历史窗口与手工回收",
+      "subject": "retention-policy",
+      "state": "vacuum",
+      "invariant": "lowest active read timestamp limits pruning",
+      "observable": "用户历史窗口与手工回收的公开结果可通过POST /vacuum核对",
+      "primary_mechanism": "time_semantics",
+      "workflow_ids": [
+        "vacuum"
+      ],
+      "source_anchors": [
+        "internal/engine/maintenance.go",
+        "internal/versions/vacuum.go",
+        "internal/index/registry.go"
+      ],
+      "existing_touch_points": {
+        "files": [
+          "internal/engine/maintenance.go",
+          "internal/versions/vacuum.go",
+          "internal/index/registry.go"
+        ],
+        "functions": [
+          "Vacuum",
+          "Build"
+        ]
+      }
+    },
+    {
+      "id": "功能优化-aggregate-selection",
+      "task_type": "功能优化",
+      "capability_family": "聚合输入选择与数值溢出诊断",
+      "subject": "aggregate-selection",
+      "state": "sql-execute",
+      "invariant": "syntax errors cannot partially execute; SQL and structured query agree",
+      "observable": "聚合输入选择与数值溢出诊断的公开结果可通过POST /sql核对",
+      "primary_mechanism": "capacity",
+      "workflow_ids": [
+        "sql-execute"
+      ],
+      "source_anchors": [
+        "internal/syntax/parser.go",
+        "internal/query/bind.go",
+        "internal/query/execute.go"
+      ],
+      "existing_touch_points": {
+        "files": [
+          "internal/syntax/parser.go",
+          "internal/query/bind.go",
+          "internal/query/execute.go"
+        ],
+        "functions": [
+          "Parse",
+          "Bind",
+          "Execute"
+        ]
+      }
+    },
+    {
+      "id": "功能优化-ordered-limit",
+      "task_type": "功能优化",
+      "capability_family": "有序索引限制与历史可见性",
+      "subject": "ordered-limit",
+      "state": "query-plan",
+      "invariant": "historical snapshot always rechecks visible versions",
+      "observable": "有序索引限制与历史可见性的公开结果可通过POST /query with where核对",
+      "primary_mechanism": "ranking_reorder",
+      "workflow_ids": [
+        "query-plan"
+      ],
+      "source_anchors": [
+        "internal/query/plan.go",
+        "internal/engine/read.go",
+        "internal/query/execute.go"
+      ],
+      "existing_touch_points": {
+        "files": [
+          "internal/query/plan.go",
+          "internal/engine/read.go",
+          "internal/query/execute.go"
+        ],
+        "functions": [
+          "Choose",
+          "Query",
+          "Execute"
+        ]
+      }
+    },
+    {
+      "id": "功能优化-result-budget",
+      "task_type": "功能优化",
+      "capability_family": "结果字节边界与完整性提示",
+      "subject": "result-budget",
+      "state": "query-plan",
+      "invariant": "historical snapshot always rechecks visible versions",
+      "observable": "结果字节边界与完整性提示的公开结果可通过POST /query with where核对",
+      "primary_mechanism": "capacity",
+      "workflow_ids": [
+        "query-plan"
+      ],
+      "source_anchors": [
+        "internal/query/plan.go",
+        "internal/engine/read.go",
+        "internal/query/execute.go"
+      ],
+      "existing_touch_points": {
+        "files": [
+          "internal/query/plan.go",
+          "internal/engine/read.go",
+          "internal/query/execute.go"
+        ],
+        "functions": [
+          "Choose",
+          "Query",
+          "Execute"
+        ]
+      }
+    },
+    {
+      "id": "功能优化-rollback-accounting",
+      "task_type": "功能优化",
+      "capability_family": "撤销释放与运维资源可解释性",
+      "subject": "rollback-accounting",
+      "state": "transaction-close",
+      "invariant": "discard private writes, retain no pins",
+      "observable": "撤销释放与运维资源可解释性的公开结果可通过POST /transactions/{tx}/rollback核对",
+      "primary_mechanism": "resource_lifecycle",
+      "workflow_ids": [
+        "transaction-close"
+      ],
+      "source_anchors": [
+        "internal/engine/transaction.go",
+        "internal/engine/read.go"
+      ],
+      "existing_touch_points": {
+        "files": [
+          "internal/engine/transaction.go",
+          "internal/engine/read.go"
+        ],
+        "functions": [
+          "Rollback",
+          "Begin",
+          "Query"
+        ]
+      }
+    },
+    {
+      "id": "功能优化-readonly-execution",
+      "task_type": "功能优化",
+      "capability_family": "只读事务并发执行与回收保护",
+      "subject": "readonly-execution",
+      "state": "snapshot-read",
+      "invariant": "active transactions retain versions; unsupported timestamp rejected",
+      "observable": "只读事务并发执行与回收保护的公开结果可通过POST /query with transaction or at核对",
+      "primary_mechanism": "concurrency",
+      "workflow_ids": [
+        "snapshot-read"
+      ],
+      "source_anchors": [
+        "internal/engine/read.go",
+        "internal/versions/store.go"
+      ],
+      "existing_touch_points": {
+        "files": [
+          "internal/engine/read.go",
+          "internal/versions/store.go"
+        ],
+        "functions": [
+          "Query",
+          "Visible"
+        ]
+      }
+    },
+    {
+      "id": "功能优化-index-rebuild",
+      "task_type": "功能优化",
+      "capability_family": "回收后索引更新与旧读者持有",
+      "subject": "index-rebuild",
+      "state": "vacuum",
+      "invariant": "lowest active read timestamp limits pruning",
+      "observable": "回收后索引更新与旧读者持有的公开结果可通过POST /vacuum核对",
+      "primary_mechanism": "concurrency",
+      "workflow_ids": [
+        "vacuum"
+      ],
+      "source_anchors": [
+        "internal/engine/maintenance.go",
+        "internal/versions/vacuum.go",
+        "internal/index/registry.go"
+      ],
+      "existing_touch_points": {
+        "files": [
+          "internal/engine/maintenance.go",
+          "internal/versions/vacuum.go",
+          "internal/index/registry.go"
+        ],
+        "functions": [
+          "Vacuum",
+          "Build"
+        ]
+      }
+    },
+    {
+      "id": "功能优化-restore-preview",
+      "task_type": "功能优化",
+      "capability_family": "恢复前容量与依赖判定",
+      "subject": "restore-preview",
+      "state": "backup-restore",
+      "invariant": "digest and format validated before startup publishes state",
+      "observable": "恢复前容量与依赖判定的公开结果可通过GET /backup; laminad -restore核对",
+      "primary_mechanism": "recovery_rollback",
+      "workflow_ids": [
+        "backup-restore"
+      ],
+      "source_anchors": [
+        "internal/engine/maintenance.go",
+        "internal/snapshot/image.go"
+      ],
+      "existing_touch_points": {
+        "files": [
+          "internal/engine/maintenance.go",
+          "internal/snapshot/image.go"
+        ],
+        "functions": [
+          "Restore",
+          "Decode",
+          "Validate"
+        ]
+      }
+    },
+    {
+      "id": "功能优化-startup-report",
+      "task_type": "功能优化",
+      "capability_family": "尾帧恢复定位与错误边界",
+      "subject": "startup-report",
+      "state": "restart",
+      "invariant": "incomplete final frame truncated; complete corruption fails closed",
+      "observable": "尾帧恢复定位与错误边界的公开结果可通过laminad startup核对",
+      "primary_mechanism": "error_propagation",
+      "workflow_ids": [
+        "restart"
+      ],
+      "source_anchors": [
+        "internal/journal/wal.go",
+        "internal/engine/database.go",
+        "internal/engine/replay.go"
+      ],
+      "existing_touch_points": {
+        "files": [
+          "internal/journal/wal.go",
+          "internal/engine/database.go",
+          "internal/engine/replay.go"
+        ],
+        "functions": [
+          "recover",
+          "Open",
+          "apply"
+        ]
+      }
+    },
+    {
+      "id": "功能优化-read-concurrency",
+      "task_type": "功能优化",
+      "capability_family": "普通查询脱离全局独占临界区",
+      "subject": "read-concurrency",
+      "state": "query-plan",
+      "invariant": "historical snapshot always rechecks visible versions",
+      "observable": "普通查询脱离全局独占临界区的公开结果可通过POST /query with where核对",
+      "primary_mechanism": "concurrency",
+      "workflow_ids": [
+        "query-plan"
+      ],
+      "source_anchors": [
+        "internal/query/plan.go",
+        "internal/engine/read.go",
+        "internal/query/execute.go"
+      ],
+      "existing_touch_points": {
+        "files": [
+          "internal/query/plan.go",
+          "internal/engine/read.go",
+          "internal/query/execute.go"
+        ],
+        "functions": [
+          "Choose",
+          "Query",
+          "Execute"
+        ]
+      }
+    },
+    {
+      "id": "功能优化-catalog-snapshot",
+      "task_type": "功能优化",
+      "capability_family": "发现目录与历史查询的共同视图",
+      "subject": "catalog-snapshot",
+      "state": "catalog-create",
+      "invariant": "invalid schema leaves no relation",
+      "observable": "发现目录与历史查询的共同视图的公开结果可通过POST /relations核对",
+      "primary_mechanism": "snapshot_consistency",
+      "workflow_ids": [
+        "catalog-create"
+      ],
+      "source_anchors": [
+        "internal/catalog/schema.go",
+        "internal/engine/constraints.go"
+      ],
+      "existing_touch_points": {
+        "files": [
+          "internal/catalog/schema.go",
+          "internal/engine/constraints.go"
+        ],
+        "functions": [
+          "Normalize",
+          "CreateRelation"
+        ]
+      }
+    },
+    {
+      "id": "代码重构-commit-boundary",
+      "task_type": "代码重构",
+      "capability_family": "提交验证与持久化发布的职责边界",
+      "subject": "commit-boundary",
+      "state": "txn-write",
+      "invariant": "first committer wins; unique validation against current full resulting state",
+      "observable": "提交验证与持久化发布的职责边界的公开结果可通过POST /transactions/{tx}/put then /commit核对",
+      "primary_mechanism": "batch_transaction",
+      "workflow_ids": [
+        "txn-write"
+      ],
+      "source_anchors": [
+        "internal/engine/transaction.go",
+        "internal/journal/wal.go",
+        "internal/catalog/schema.go"
+      ],
+      "existing_touch_points": {
+        "files": [
+          "internal/engine/transaction.go",
+          "internal/journal/wal.go",
+          "internal/catalog/schema.go"
+        ],
+        "functions": [
+          "Commit",
+          "Append",
+          "Normalize"
+        ]
+      }
+    },
+    {
+      "id": "代码重构-query-boundary",
+      "task_type": "代码重构",
+      "capability_family": "绑定计划与执行结果事实的职责边界",
+      "subject": "query-boundary",
+      "state": "query-plan",
+      "invariant": "historical snapshot always rechecks visible versions",
+      "observable": "绑定计划与执行结果事实的职责边界的公开结果可通过POST /query with where核对",
+      "primary_mechanism": "snapshot_consistency",
+      "workflow_ids": [
+        "query-plan"
+      ],
+      "source_anchors": [
+        "internal/query/plan.go",
+        "internal/engine/read.go",
+        "internal/query/execute.go"
+      ],
+      "existing_touch_points": {
+        "files": [
+          "internal/query/plan.go",
+          "internal/engine/read.go",
+          "internal/query/execute.go"
+        ],
+        "functions": [
+          "Choose",
+          "Query",
+          "Execute"
+        ]
+      }
+    },
+    {
+      "id": "代码重构-restore-boundary",
+      "task_type": "代码重构",
+      "capability_family": "快照验证与数据目录安装职责",
+      "subject": "restore-boundary",
+      "state": "backup-restore",
+      "invariant": "digest and format validated before startup publishes state",
+      "observable": "快照验证与数据目录安装职责的公开结果可通过GET /backup; laminad -restore核对",
+      "primary_mechanism": "recovery_rollback",
+      "workflow_ids": [
+        "backup-restore"
+      ],
+      "source_anchors": [
+        "internal/engine/maintenance.go",
+        "internal/snapshot/image.go"
+      ],
+      "existing_touch_points": {
+        "files": [
+          "internal/engine/maintenance.go",
+          "internal/snapshot/image.go"
+        ],
+        "functions": [
+          "Restore",
+          "Decode",
+          "Validate"
+        ]
+      }
+    },
+    {
+      "id": "代码重构-replay-dispatch",
+      "task_type": "代码重构",
+      "capability_family": "重放记录解释与内存状态所有权",
+      "subject": "replay-dispatch",
+      "state": "restart",
+      "invariant": "incomplete final frame truncated; complete corruption fails closed",
+      "observable": "重放记录解释与内存状态所有权的公开结果可通过laminad startup核对",
+      "primary_mechanism": "versioning_audit",
+      "workflow_ids": [
+        "restart"
+      ],
+      "source_anchors": [
+        "internal/journal/wal.go",
+        "internal/engine/database.go",
+        "internal/engine/replay.go"
+      ],
+      "existing_touch_points": {
+        "files": [
+          "internal/journal/wal.go",
+          "internal/engine/database.go",
+          "internal/engine/replay.go"
+        ],
+        "functions": [
+          "recover",
+          "Open",
+          "apply"
+        ]
+      }
+    },
+    {
+      "id": "代码重构-session-owner",
+      "task_type": "代码重构",
+      "capability_family": "会话注册与读水位所有权",
+      "subject": "session-owner",
+      "state": "transaction-close",
+      "invariant": "discard private writes, retain no pins",
+      "observable": "会话注册与读水位所有权的公开结果可通过POST /transactions/{tx}/rollback核对",
+      "primary_mechanism": "resource_lifecycle",
+      "workflow_ids": [
+        "transaction-close"
+      ],
+      "source_anchors": [
+        "internal/engine/transaction.go",
+        "internal/engine/read.go"
+      ],
+      "existing_touch_points": {
+        "files": [
+          "internal/engine/transaction.go",
+          "internal/engine/read.go"
+        ],
+        "functions": [
+          "Rollback",
+          "Begin",
+          "Query"
+        ]
+      }
+    },
+    {
+      "id": "代码重构-catalog-ownership",
+      "task_type": "代码重构",
+      "capability_family": "目录克隆与不可变模式边界",
+      "subject": "catalog-ownership",
+      "state": "catalog-create",
+      "invariant": "invalid schema leaves no relation",
+      "observable": "目录克隆与不可变模式边界的公开结果可通过POST /relations核对",
+      "primary_mechanism": "versioning_audit",
+      "workflow_ids": [
+        "catalog-create"
+      ],
+      "source_anchors": [
+        "internal/catalog/schema.go",
+        "internal/engine/constraints.go"
+      ],
+      "existing_touch_points": {
+        "files": [
+          "internal/catalog/schema.go",
+          "internal/engine/constraints.go"
+        ],
+        "functions": [
+          "Normalize",
+          "CreateRelation"
+        ]
+      }
+    },
+    {
+      "id": "代码重构-index-maintenance",
+      "task_type": "代码重构",
+      "capability_family": "历史索引构建与提交增量职责",
+      "subject": "index-maintenance",
+      "state": "index-build",
+      "invariant": "failed unique build leaves no catalog entry",
+      "observable": "历史索引构建与提交增量职责的公开结果可通过POST /indexes核对",
+      "primary_mechanism": "lineage",
+      "workflow_ids": [
+        "index-build"
+      ],
+      "source_anchors": [
+        "internal/engine/constraints.go",
+        "internal/index/registry.go"
+      ],
+      "existing_touch_points": {
+        "files": [
+          "internal/engine/constraints.go",
+          "internal/index/registry.go"
+        ],
+        "functions": [
+          "CreateIndex",
+          "Build"
+        ]
+      }
+    },
+    {
+      "id": "代码重构-visibility-adapter",
+      "task_type": "代码重构",
+      "capability_family": "查询候选物化与版本解释",
+      "subject": "visibility-adapter",
+      "state": "snapshot-read",
+      "invariant": "active transactions retain versions; unsupported timestamp rejected",
+      "observable": "查询候选物化与版本解释的公开结果可通过POST /query with transaction or at核对",
+      "primary_mechanism": "snapshot_consistency",
+      "workflow_ids": [
+        "snapshot-read"
+      ],
+      "source_anchors": [
+        "internal/engine/read.go",
+        "internal/versions/store.go"
+      ],
+      "existing_touch_points": {
+        "files": [
+          "internal/engine/read.go",
+          "internal/versions/store.go"
+        ],
+        "functions": [
+          "Query",
+          "Visible"
+        ]
+      }
+    },
+    {
+      "id": "代码重构-http-errors",
+      "task_type": "代码重构",
+      "capability_family": "领域错误与传输错误翻译",
+      "subject": "http-errors",
+      "state": "txn-conflict",
+      "invariant": "no partial commit or sequence advance on conflict",
+      "observable": "领域错误与传输错误翻译的公开结果可通过POST /transactions/{tx}/commit核对",
+      "primary_mechanism": "error_propagation",
+      "workflow_ids": [
+        "txn-conflict"
+      ],
+      "source_anchors": [
+        "internal/engine/transaction.go",
+        "internal/engine/constraints.go",
+        "internal/versions/store.go"
+      ],
+      "existing_touch_points": {
+        "files": [
+          "internal/engine/transaction.go",
+          "internal/engine/constraints.go",
+          "internal/versions/store.go"
+        ],
+        "functions": [
+          "Commit",
+          "unique",
+          "Latest"
+        ]
+      }
+    },
+    {
+      "id": "代码重构-scalar-codec",
+      "task_type": "代码重构",
+      "capability_family": "标量编码与类型比较的边界",
+      "subject": "scalar-codec",
+      "state": "sql-execute",
+      "invariant": "syntax errors cannot partially execute; SQL and structured query agree",
+      "observable": "标量编码与类型比较的边界的公开结果可通过POST /sql核对",
+      "primary_mechanism": "policy_rules",
+      "workflow_ids": [
+        "sql-execute"
+      ],
+      "source_anchors": [
+        "internal/syntax/parser.go",
+        "internal/query/bind.go",
+        "internal/query/execute.go"
+      ],
+      "existing_touch_points": {
+        "files": [
+          "internal/syntax/parser.go",
+          "internal/query/bind.go",
+          "internal/query/execute.go"
+        ],
+        "functions": [
+          "Parse",
+          "Bind",
+          "Execute"
+        ]
+      }
+    },
+    {
+      "id": "代码重构-change-reader",
+      "task_type": "代码重构",
+      "capability_family": "历史记录读取与分页职责",
+      "subject": "change-reader",
+      "state": "changes",
+      "invariant": "no split transaction at page boundary; watermark is last delivered sequence",
+      "observable": "历史记录读取与分页职责的公开结果可通过GET /changes核对",
+      "primary_mechanism": "resource_lifecycle",
+      "workflow_ids": [
+        "changes"
+      ],
+      "source_anchors": [
+        "internal/engine/changes.go",
+        "internal/journal/record.go",
+        "internal/journal/wal.go"
+      ],
+      "existing_touch_points": {
+        "files": [
+          "internal/engine/changes.go",
+          "internal/journal/record.go",
+          "internal/journal/wal.go"
+        ],
+        "functions": [
+          "Changes",
+          "Append"
+        ]
+      }
+    },
+    {
+      "id": "代码重构-vacuum-planner",
+      "task_type": "代码重构",
+      "capability_family": "回收水位计算与物理删除",
+      "subject": "vacuum-planner",
+      "state": "vacuum",
+      "invariant": "lowest active read timestamp limits pruning",
+      "observable": "回收水位计算与物理删除的公开结果可通过POST /vacuum核对",
+      "primary_mechanism": "resource_lifecycle",
+      "workflow_ids": [
+        "vacuum"
+      ],
+      "source_anchors": [
+        "internal/engine/maintenance.go",
+        "internal/versions/vacuum.go",
+        "internal/index/registry.go"
+      ],
+      "existing_touch_points": {
+        "files": [
+          "internal/engine/maintenance.go",
+          "internal/versions/vacuum.go",
+          "internal/index/registry.go"
+        ],
+        "functions": [
+          "Vacuum",
+          "Build"
+        ]
+      }
+    },
+    {
+      "id": "代码重构-backup-capture",
+      "task_type": "代码重构",
+      "capability_family": "导出捕获与字节编码所有权",
+      "subject": "backup-capture",
+      "state": "checkpoint",
+      "invariant": "previous image survives failed replacement",
+      "observable": "导出捕获与字节编码所有权的公开结果可通过POST /checkpoint核对",
+      "primary_mechanism": "export_freeze",
+      "workflow_ids": [
+        "checkpoint"
+      ],
+      "source_anchors": [
+        "internal/engine/maintenance.go",
+        "internal/snapshot/atomic.go"
+      ],
+      "existing_touch_points": {
+        "files": [
+          "internal/engine/maintenance.go",
+          "internal/snapshot/atomic.go"
+        ],
+        "functions": [
+          "Checkpoint",
+          "Write",
+          "Atomic"
+        ]
+      }
+    },
+    {
+      "id": "代码重构-statistics-facts",
+      "task_type": "代码重构",
+      "capability_family": "诊断计数与服务状态读取",
+      "subject": "statistics-facts",
+      "state": "statistics",
+      "invariant": "candidates vs scanned vs returned have distinct meanings",
+      "observable": "诊断计数与服务状态读取的公开结果可通过GET /stats and POST /query核对",
+      "primary_mechanism": "versioning_audit",
+      "workflow_ids": [
+        "statistics"
+      ],
+      "source_anchors": [
+        "internal/engine/stats.go",
+        "internal/query/execute.go"
+      ],
+      "existing_touch_points": {
+        "files": [
+          "internal/engine/stats.go",
+          "internal/query/execute.go"
+        ],
+        "functions": [
+          "Stats",
+          "Execute"
+        ]
+      }
+    },
+    {
+      "id": "代码重构-sql-ast",
+      "task_type": "代码重构",
+      "capability_family": "解析语法与执行请求之间的边界",
+      "subject": "sql-ast",
+      "state": "sql-execute",
+      "invariant": "syntax errors cannot partially execute; SQL and structured query agree",
+      "observable": "解析语法与执行请求之间的边界的公开结果可通过POST /sql核对",
+      "primary_mechanism": "policy_rules",
+      "workflow_ids": [
+        "sql-execute"
+      ],
+      "source_anchors": [
+        "internal/syntax/parser.go",
+        "internal/query/bind.go",
+        "internal/query/execute.go"
+      ],
+      "existing_touch_points": {
+        "files": [
+          "internal/syntax/parser.go",
+          "internal/query/bind.go",
+          "internal/query/execute.go"
+        ],
+        "functions": [
+          "Parse",
+          "Bind",
+          "Execute"
+        ]
+      }
+    },
+    {
+      "id": "依赖升级与迁移-wal-binary",
+      "task_type": "依赖升级与迁移",
+      "capability_family": "JSON日志到版本化二进制帧",
+      "subject": "wal-binary",
+      "state": "restart",
+      "invariant": "incomplete final frame truncated; complete corruption fails closed",
+      "observable": "JSON日志到版本化二进制帧的公开结果可通过laminad startup核对",
+      "primary_mechanism": "recovery_rollback",
+      "workflow_ids": [
+        "restart"
+      ],
+      "source_anchors": [
+        "internal/journal/wal.go",
+        "internal/engine/database.go",
+        "internal/engine/replay.go"
+      ],
+      "existing_touch_points": {
+        "files": [
+          "internal/journal/wal.go",
+          "internal/engine/database.go",
+          "internal/engine/replay.go"
+        ],
+        "functions": [
+          "recover",
+          "Open",
+          "apply"
+        ]
+      }
+    },
+    {
+      "id": "依赖升级与迁移-index-btree",
+      "task_type": "依赖升级与迁移",
+      "capability_family": "切片索引到有序树实现",
+      "subject": "index-btree",
+      "state": "query-plan",
+      "invariant": "historical snapshot always rechecks visible versions",
+      "observable": "切片索引到有序树实现的公开结果可通过POST /query with where核对",
+      "primary_mechanism": "ranking_reorder",
+      "workflow_ids": [
+        "query-plan"
+      ],
+      "source_anchors": [
+        "internal/query/plan.go",
+        "internal/engine/read.go",
+        "internal/query/execute.go"
+      ],
+      "existing_touch_points": {
+        "files": [
+          "internal/query/plan.go",
+          "internal/engine/read.go",
+          "internal/query/execute.go"
+        ],
+        "functions": [
+          "Choose",
+          "Query",
+          "Execute"
+        ]
+      }
+    },
+    {
+      "id": "依赖升级与迁移-checkpoint-binary",
+      "task_type": "依赖升级与迁移",
+      "capability_family": "JSON图像到流式二进制镜像",
+      "subject": "checkpoint-binary",
+      "state": "checkpoint",
+      "invariant": "previous image survives failed replacement",
+      "observable": "JSON图像到流式二进制镜像的公开结果可通过POST /checkpoint核对",
+      "primary_mechanism": "export_freeze",
+      "workflow_ids": [
+        "checkpoint"
+      ],
+      "source_anchors": [
+        "internal/engine/maintenance.go",
+        "internal/snapshot/atomic.go"
+      ],
+      "existing_touch_points": {
+        "files": [
+          "internal/engine/maintenance.go",
+          "internal/snapshot/atomic.go"
+        ],
+        "functions": [
+          "Checkpoint",
+          "Write",
+          "Atomic"
+        ]
+      }
+    },
+    {
+      "id": "依赖升级与迁移-engine-paging",
+      "task_type": "依赖升级与迁移",
+      "capability_family": "内存版本链到分页持久存储",
+      "subject": "engine-paging",
+      "state": "snapshot-read",
+      "invariant": "active transactions retain versions; unsupported timestamp rejected",
+      "observable": "内存版本链到分页持久存储的公开结果可通过POST /query with transaction or at核对",
+      "primary_mechanism": "resource_lifecycle",
+      "workflow_ids": [
+        "snapshot-read"
+      ],
+      "source_anchors": [
+        "internal/engine/read.go",
+        "internal/versions/store.go"
+      ],
+      "existing_touch_points": {
+        "files": [
+          "internal/engine/read.go",
+          "internal/versions/store.go"
+        ],
+        "functions": [
+          "Query",
+          "Visible"
+        ]
+      }
+    },
+    {
+      "id": "依赖升级与迁移-api-version",
+      "task_type": "依赖升级与迁移",
+      "capability_family": "现有HTTP协议向第二版本迁移",
+      "subject": "api-version",
+      "state": "txn-write",
+      "invariant": "first committer wins; unique validation against current full resulting state",
+      "observable": "现有HTTP协议向第二版本迁移的公开结果可通过POST /transactions/{tx}/put then /commit核对",
+      "primary_mechanism": "versioning_audit",
+      "workflow_ids": [
+        "txn-write"
+      ],
+      "source_anchors": [
+        "internal/engine/transaction.go",
+        "internal/journal/wal.go",
+        "internal/catalog/schema.go"
+      ],
+      "existing_touch_points": {
+        "files": [
+          "internal/engine/transaction.go",
+          "internal/journal/wal.go",
+          "internal/catalog/schema.go"
+        ],
+        "functions": [
+          "Commit",
+          "Append",
+          "Normalize"
+        ]
+      }
+    },
+    {
+      "id": "依赖升级与迁移-integer-decimal",
+      "task_type": "依赖升级与迁移",
+      "capability_family": "整数计算向定点十进制迁移",
+      "subject": "integer-decimal",
+      "state": "sql-execute",
+      "invariant": "syntax errors cannot partially execute; SQL and structured query agree",
+      "observable": "整数计算向定点十进制迁移的公开结果可通过POST /sql核对",
+      "primary_mechanism": "policy_rules",
+      "workflow_ids": [
+        "sql-execute"
+      ],
+      "source_anchors": [
+        "internal/syntax/parser.go",
+        "internal/query/bind.go",
+        "internal/query/execute.go"
+      ],
+      "existing_touch_points": {
+        "files": [
+          "internal/syntax/parser.go",
+          "internal/query/bind.go",
+          "internal/query/execute.go"
+        ],
+        "functions": [
+          "Parse",
+          "Bind",
+          "Execute"
+        ]
+      }
+    },
+    {
+      "id": "依赖升级与迁移-lock-platform",
+      "task_type": "依赖升级与迁移",
+      "capability_family": "Unix文件锁向跨平台目录独占迁移",
+      "subject": "lock-platform",
+      "state": "restart",
+      "invariant": "incomplete final frame truncated; complete corruption fails closed",
+      "observable": "Unix文件锁向跨平台目录独占迁移的公开结果可通过laminad startup核对",
+      "primary_mechanism": "resource_lifecycle",
+      "workflow_ids": [
+        "restart"
+      ],
+      "source_anchors": [
+        "internal/journal/wal.go",
+        "internal/engine/database.go",
+        "internal/engine/replay.go"
+      ],
+      "existing_touch_points": {
+        "files": [
+          "internal/journal/wal.go",
+          "internal/engine/database.go",
+          "internal/engine/replay.go"
+        ],
+        "functions": [
+          "recover",
+          "Open",
+          "apply"
+        ]
+      }
+    },
+    {
+      "id": "依赖升级与迁移-row-layout",
+      "task_type": "依赖升级与迁移",
+      "capability_family": "映射行到目录绑定的列位置布局",
+      "subject": "row-layout",
+      "state": "txn-write",
+      "invariant": "first committer wins; unique validation against current full resulting state",
+      "observable": "映射行到目录绑定的列位置布局的公开结果可通过POST /transactions/{tx}/put then /commit核对",
+      "primary_mechanism": "versioning_audit",
+      "workflow_ids": [
+        "txn-write"
+      ],
+      "source_anchors": [
+        "internal/engine/transaction.go",
+        "internal/journal/wal.go",
+        "internal/catalog/schema.go"
+      ],
+      "existing_touch_points": {
+        "files": [
+          "internal/engine/transaction.go",
+          "internal/journal/wal.go",
+          "internal/catalog/schema.go"
+        ],
+        "functions": [
+          "Commit",
+          "Append",
+          "Normalize"
+        ]
+      }
+    },
+    {
+      "id": "依赖升级与迁移-checksum-crc",
+      "task_type": "依赖升级与迁移",
+      "capability_family": "CRC日志到分块强校验版本",
+      "subject": "checksum-crc",
+      "state": "restart",
+      "invariant": "incomplete final frame truncated; complete corruption fails closed",
+      "observable": "CRC日志到分块强校验版本的公开结果可通过laminad startup核对",
+      "primary_mechanism": "recovery_rollback",
+      "workflow_ids": [
+        "restart"
+      ],
+      "source_anchors": [
+        "internal/journal/wal.go",
+        "internal/engine/database.go",
+        "internal/engine/replay.go"
+      ],
+      "existing_touch_points": {
+        "files": [
+          "internal/journal/wal.go",
+          "internal/engine/database.go",
+          "internal/engine/replay.go"
+        ],
+        "functions": [
+          "recover",
+          "Open",
+          "apply"
+        ]
+      }
+    },
+    {
+      "id": "依赖升级与迁移-snapshot-compression",
+      "task_type": "依赖升级与迁移",
+      "capability_family": "未压缩图像到压缩格式并存",
+      "subject": "snapshot-compression",
+      "state": "backup-restore",
+      "invariant": "digest and format validated before startup publishes state",
+      "observable": "未压缩图像到压缩格式并存的公开结果可通过GET /backup; laminad -restore核对",
+      "primary_mechanism": "capacity",
+      "workflow_ids": [
+        "backup-restore"
+      ],
+      "source_anchors": [
+        "internal/engine/maintenance.go",
+        "internal/snapshot/image.go"
+      ],
+      "existing_touch_points": {
+        "files": [
+          "internal/engine/maintenance.go",
+          "internal/snapshot/image.go"
+        ],
+        "functions": [
+          "Restore",
+          "Decode",
+          "Validate"
+        ]
+      }
+    },
+    {
+      "id": "依赖升级与迁移-sql-parser",
+      "task_type": "依赖升级与迁移",
+      "capability_family": "手写SELECT解析到第三方语法树",
+      "subject": "sql-parser",
+      "state": "sql-execute",
+      "invariant": "syntax errors cannot partially execute; SQL and structured query agree",
+      "observable": "手写SELECT解析到第三方语法树的公开结果可通过POST /sql核对",
+      "primary_mechanism": "policy_rules",
+      "workflow_ids": [
+        "sql-execute"
+      ],
+      "source_anchors": [
+        "internal/syntax/parser.go",
+        "internal/query/bind.go",
+        "internal/query/execute.go"
+      ],
+      "existing_touch_points": {
+        "files": [
+          "internal/syntax/parser.go",
+          "internal/query/bind.go",
+          "internal/query/execute.go"
+        ],
+        "functions": [
+          "Parse",
+          "Bind",
+          "Execute"
+        ]
+      }
+    },
+    {
+      "id": "依赖升级与迁移-http-framework",
+      "task_type": "依赖升级与迁移",
+      "capability_family": "标准路由向框架服务迁移",
+      "subject": "http-framework",
+      "state": "txn-conflict",
+      "invariant": "no partial commit or sequence advance on conflict",
+      "observable": "标准路由向框架服务迁移的公开结果可通过POST /transactions/{tx}/commit核对",
+      "primary_mechanism": "error_propagation",
+      "workflow_ids": [
+        "txn-conflict"
+      ],
+      "source_anchors": [
+        "internal/engine/transaction.go",
+        "internal/engine/constraints.go",
+        "internal/versions/store.go"
+      ],
+      "existing_touch_points": {
+        "files": [
+          "internal/engine/transaction.go",
+          "internal/engine/constraints.go",
+          "internal/versions/store.go"
+        ],
+        "functions": [
+          "Commit",
+          "unique",
+          "Latest"
+        ]
+      }
+    },
+    {
+      "id": "依赖升级与迁移-wal-segments",
+      "task_type": "依赖升级与迁移",
+      "capability_family": "单日志文件向多段存储迁移",
+      "subject": "wal-segments",
+      "state": "changes",
+      "invariant": "no split transaction at page boundary; watermark is last delivered sequence",
+      "observable": "单日志文件向多段存储迁移的公开结果可通过GET /changes核对",
+      "primary_mechanism": "resource_lifecycle",
+      "workflow_ids": [
+        "changes"
+      ],
+      "source_anchors": [
+        "internal/engine/changes.go",
+        "internal/journal/record.go",
+        "internal/journal/wal.go"
+      ],
+      "existing_touch_points": {
+        "files": [
+          "internal/engine/changes.go",
+          "internal/journal/record.go",
+          "internal/journal/wal.go"
+        ],
+        "functions": [
+          "Changes",
+          "Append"
+        ]
+      }
+    },
+    {
+      "id": "依赖升级与迁移-catalog-format",
+      "task_type": "依赖升级与迁移",
+      "capability_family": "目录元数据版本升级",
+      "subject": "catalog-format",
+      "state": "catalog-create",
+      "invariant": "invalid schema leaves no relation",
+      "observable": "目录元数据版本升级的公开结果可通过POST /relations核对",
+      "primary_mechanism": "versioning_audit",
+      "workflow_ids": [
+        "catalog-create"
+      ],
+      "source_anchors": [
+        "internal/catalog/schema.go",
+        "internal/engine/constraints.go"
+      ],
+      "existing_touch_points": {
+        "files": [
+          "internal/catalog/schema.go",
+          "internal/engine/constraints.go"
+        ],
+        "functions": [
+          "Normalize",
+          "CreateRelation"
+        ]
+      }
+    },
+    {
+      "id": "依赖升级与迁移-runtime-version",
+      "task_type": "依赖升级与迁移",
+      "capability_family": "Go运行时发布版本迁移验证",
+      "subject": "runtime-version",
+      "state": "checkpoint",
+      "invariant": "previous image survives failed replacement",
+      "observable": "Go运行时发布版本迁移验证的公开结果可通过POST /checkpoint核对",
+      "primary_mechanism": "concurrency",
+      "workflow_ids": [
+        "checkpoint"
+      ],
+      "source_anchors": [
+        "internal/engine/maintenance.go",
+        "internal/snapshot/atomic.go"
+      ],
+      "existing_touch_points": {
+        "files": [
+          "internal/engine/maintenance.go",
+          "internal/snapshot/atomic.go"
+        ],
+        "functions": [
+          "Checkpoint",
+          "Write",
+          "Atomic"
+        ]
+      }
+    },
+    {
+      "id": "质量保障-history-oracle",
+      "task_type": "质量保障",
+      "capability_family": "快照数据库状态机独立参照",
+      "subject": "history-oracle",
+      "state": "snapshot-read",
+      "invariant": "active transactions retain versions; unsupported timestamp rejected",
+      "observable": "快照数据库状态机独立参照的公开结果可通过POST /query with transaction or at核对",
+      "primary_mechanism": "snapshot_consistency",
+      "workflow_ids": [
+        "snapshot-read"
+      ],
+      "source_anchors": [
+        "internal/engine/read.go",
+        "internal/versions/store.go"
+      ],
+      "existing_touch_points": {
+        "files": [
+          "internal/engine/read.go",
+          "internal/versions/store.go"
+        ],
+        "functions": [
+          "Query",
+          "Visible"
+        ]
+      }
+    },
+    {
+      "id": "质量保障-crash-matrix",
+      "task_type": "质量保障",
+      "capability_family": "耐久性故障点恢复矩阵",
+      "subject": "crash-matrix",
+      "state": "restart",
+      "invariant": "incomplete final frame truncated; complete corruption fails closed",
+      "observable": "耐久性故障点恢复矩阵的公开结果可通过laminad startup核对",
+      "primary_mechanism": "recovery_rollback",
+      "workflow_ids": [
+        "restart"
+      ],
+      "source_anchors": [
+        "internal/journal/wal.go",
+        "internal/engine/database.go",
+        "internal/engine/replay.go"
+      ],
+      "existing_touch_points": {
+        "files": [
+          "internal/journal/wal.go",
+          "internal/engine/database.go",
+          "internal/engine/replay.go"
+        ],
+        "functions": [
+          "recover",
+          "Open",
+          "apply"
+        ]
+      }
+    },
+    {
+      "id": "质量保障-unique-atomic",
+      "task_type": "质量保障",
+      "capability_family": "跨关系唯一约束与原子失败",
+      "subject": "unique-atomic",
+      "state": "txn-write",
+      "invariant": "first committer wins; unique validation against current full resulting state",
+      "observable": "跨关系唯一约束与原子失败的公开结果可通过POST /transactions/{tx}/put then /commit核对",
+      "primary_mechanism": "batch_transaction",
+      "workflow_ids": [
+        "txn-write"
+      ],
+      "source_anchors": [
+        "internal/engine/transaction.go",
+        "internal/journal/wal.go",
+        "internal/catalog/schema.go"
+      ],
+      "existing_touch_points": {
+        "files": [
+          "internal/engine/transaction.go",
+          "internal/journal/wal.go",
+          "internal/catalog/schema.go"
+        ],
+        "functions": [
+          "Commit",
+          "Append",
+          "Normalize"
+        ]
+      }
+    },
+    {
+      "id": "质量保障-sql-differential",
+      "task_type": "质量保障",
+      "capability_family": "SQL与结构化查询差分",
+      "subject": "sql-differential",
+      "state": "sql-execute",
+      "invariant": "syntax errors cannot partially execute; SQL and structured query agree",
+      "observable": "SQL与结构化查询差分的公开结果可通过POST /sql核对",
+      "primary_mechanism": "policy_rules",
+      "workflow_ids": [
+        "sql-execute"
+      ],
+      "source_anchors": [
+        "internal/syntax/parser.go",
+        "internal/query/bind.go",
+        "internal/query/execute.go"
+      ],
+      "existing_touch_points": {
+        "files": [
+          "internal/syntax/parser.go",
+          "internal/query/bind.go",
+          "internal/query/execute.go"
+        ],
+        "functions": [
+          "Parse",
+          "Bind",
+          "Execute"
+        ]
+      }
+    },
+    {
+      "id": "质量保障-index-differential",
+      "task_type": "质量保障",
+      "capability_family": "历史索引与全扫差分",
+      "subject": "index-differential",
+      "state": "query-plan",
+      "invariant": "historical snapshot always rechecks visible versions",
+      "observable": "历史索引与全扫差分的公开结果可通过POST /query with where核对",
+      "primary_mechanism": "snapshot_consistency",
+      "workflow_ids": [
+        "query-plan"
+      ],
+      "source_anchors": [
+        "internal/query/plan.go",
+        "internal/engine/read.go",
+        "internal/query/execute.go"
+      ],
+      "existing_touch_points": {
+        "files": [
+          "internal/query/plan.go",
+          "internal/engine/read.go",
+          "internal/query/execute.go"
+        ],
+        "functions": [
+          "Choose",
+          "Query",
+          "Execute"
+        ]
+      }
+    },
+    {
+      "id": "质量保障-backup-compat",
+      "task_type": "质量保障",
+      "capability_family": "备份格式兼容与污染隔离",
+      "subject": "backup-compat",
+      "state": "backup-restore",
+      "invariant": "digest and format validated before startup publishes state",
+      "observable": "备份格式兼容与污染隔离的公开结果可通过GET /backup; laminad -restore核对",
+      "primary_mechanism": "versioning_audit",
+      "workflow_ids": [
+        "backup-restore"
+      ],
+      "source_anchors": [
+        "internal/engine/maintenance.go",
+        "internal/snapshot/image.go"
+      ],
+      "existing_touch_points": {
+        "files": [
+          "internal/engine/maintenance.go",
+          "internal/snapshot/image.go"
+        ],
+        "functions": [
+          "Restore",
+          "Decode",
+          "Validate"
+        ]
+      }
+    },
+    {
+      "id": "质量保障-vacuum-state",
+      "task_type": "质量保障",
+      "capability_family": "回收水位与活动读者性质",
+      "subject": "vacuum-state",
+      "state": "vacuum",
+      "invariant": "lowest active read timestamp limits pruning",
+      "observable": "回收水位与活动读者性质的公开结果可通过POST /vacuum核对",
+      "primary_mechanism": "resource_lifecycle",
+      "workflow_ids": [
+        "vacuum"
+      ],
+      "source_anchors": [
+        "internal/engine/maintenance.go",
+        "internal/versions/vacuum.go",
+        "internal/index/registry.go"
+      ],
+      "existing_touch_points": {
+        "files": [
+          "internal/engine/maintenance.go",
+          "internal/versions/vacuum.go",
+          "internal/index/registry.go"
+        ],
+        "functions": [
+          "Vacuum",
+          "Build"
+        ]
+      }
+    },
+    {
+      "id": "质量保障-race-schedule",
+      "task_type": "质量保障",
+      "capability_family": "并发提交的可控交错",
+      "subject": "race-schedule",
+      "state": "txn-conflict",
+      "invariant": "no partial commit or sequence advance on conflict",
+      "observable": "并发提交的可控交错的公开结果可通过POST /transactions/{tx}/commit核对",
+      "primary_mechanism": "concurrency",
+      "workflow_ids": [
+        "txn-conflict"
+      ],
+      "source_anchors": [
+        "internal/engine/transaction.go",
+        "internal/engine/constraints.go",
+        "internal/versions/store.go"
+      ],
+      "existing_touch_points": {
+        "files": [
+          "internal/engine/transaction.go",
+          "internal/engine/constraints.go",
+          "internal/versions/store.go"
+        ],
+        "functions": [
+          "Commit",
+          "unique",
+          "Latest"
+        ]
+      }
+    },
+    {
+      "id": "质量保障-resource-load",
+      "task_type": "质量保障",
+      "capability_family": "事务上限与查询预算验证",
+      "subject": "resource-load",
+      "state": "statistics",
+      "invariant": "candidates vs scanned vs returned have distinct meanings",
+      "observable": "事务上限与查询预算验证的公开结果可通过GET /stats and POST /query核对",
+      "primary_mechanism": "capacity",
+      "workflow_ids": [
+        "statistics"
+      ],
+      "source_anchors": [
+        "internal/engine/stats.go",
+        "internal/query/execute.go"
+      ],
+      "existing_touch_points": {
+        "files": [
+          "internal/engine/stats.go",
+          "internal/query/execute.go"
+        ],
+        "functions": [
+          "Stats",
+          "Execute"
+        ]
+      }
+    },
+    {
+      "id": "质量保障-null-aggregate",
+      "task_type": "质量保障",
+      "capability_family": "空值聚合与整数极值",
+      "subject": "null-aggregate",
+      "state": "sql-execute",
+      "invariant": "syntax errors cannot partially execute; SQL and structured query agree",
+      "observable": "空值聚合与整数极值的公开结果可通过POST /sql核对",
+      "primary_mechanism": "policy_rules",
+      "workflow_ids": [
+        "sql-execute"
+      ],
+      "source_anchors": [
+        "internal/syntax/parser.go",
+        "internal/query/bind.go",
+        "internal/query/execute.go"
+      ],
+      "existing_touch_points": {
+        "files": [
+          "internal/syntax/parser.go",
+          "internal/query/bind.go",
+          "internal/query/execute.go"
+        ],
+        "functions": [
+          "Parse",
+          "Bind",
+          "Execute"
+        ]
+      }
+    },
+    {
+      "id": "质量保障-change-replay",
+      "task_type": "质量保障",
+      "capability_family": "变更前缀与目标状态验证",
+      "subject": "change-replay",
+      "state": "changes",
+      "invariant": "no split transaction at page boundary; watermark is last delivered sequence",
+      "observable": "变更前缀与目标状态验证的公开结果可通过GET /changes核对",
+      "primary_mechanism": "lineage",
+      "workflow_ids": [
+        "changes"
+      ],
+      "source_anchors": [
+        "internal/engine/changes.go",
+        "internal/journal/record.go",
+        "internal/journal/wal.go"
+      ],
+      "existing_touch_points": {
+        "files": [
+          "internal/engine/changes.go",
+          "internal/journal/record.go",
+          "internal/journal/wal.go"
+        ],
+        "functions": [
+          "Changes",
+          "Append"
+        ]
+      }
+    },
+    {
+      "id": "质量保障-catalog-rejection",
+      "task_type": "质量保障",
+      "capability_family": "无效目录输入不变性",
+      "subject": "catalog-rejection",
+      "state": "catalog-create",
+      "invariant": "invalid schema leaves no relation",
+      "observable": "无效目录输入不变性的公开结果可通过POST /relations核对",
+      "primary_mechanism": "batch_transaction",
+      "workflow_ids": [
+        "catalog-create"
+      ],
+      "source_anchors": [
+        "internal/catalog/schema.go",
+        "internal/engine/constraints.go"
+      ],
+      "existing_touch_points": {
+        "files": [
+          "internal/catalog/schema.go",
+          "internal/engine/constraints.go"
+        ],
+        "functions": [
+          "Normalize",
+          "CreateRelation"
+        ]
+      }
+    },
+    {
+      "id": "质量保障-restore-interrupt",
+      "task_type": "质量保障",
+      "capability_family": "还原安装中断后的目录状态",
+      "subject": "restore-interrupt",
+      "state": "backup-restore",
+      "invariant": "digest and format validated before startup publishes state",
+      "observable": "还原安装中断后的目录状态的公开结果可通过GET /backup; laminad -restore核对",
+      "primary_mechanism": "recovery_rollback",
+      "workflow_ids": [
+        "backup-restore"
+      ],
+      "source_anchors": [
+        "internal/engine/maintenance.go",
+        "internal/snapshot/image.go"
+      ],
+      "existing_touch_points": {
+        "files": [
+          "internal/engine/maintenance.go",
+          "internal/snapshot/image.go"
+        ],
+        "functions": [
+          "Restore",
+          "Decode",
+          "Validate"
+        ]
+      }
+    },
+    {
+      "id": "质量保障-transport-fuzz",
+      "task_type": "质量保障",
+      "capability_family": "有界协议解析与状态隔离",
+      "subject": "transport-fuzz",
+      "state": "txn-write",
+      "invariant": "first committer wins; unique validation against current full resulting state",
+      "observable": "有界协议解析与状态隔离的公开结果可通过POST /transactions/{tx}/put then /commit核对",
+      "primary_mechanism": "error_propagation",
+      "workflow_ids": [
+        "txn-write"
+      ],
+      "source_anchors": [
+        "internal/engine/transaction.go",
+        "internal/journal/wal.go",
+        "internal/catalog/schema.go"
+      ],
+      "existing_touch_points": {
+        "files": [
+          "internal/engine/transaction.go",
+          "internal/journal/wal.go",
+          "internal/catalog/schema.go"
+        ],
+        "functions": [
+          "Commit",
+          "Append",
+          "Normalize"
+        ]
+      }
+    },
+    {
+      "id": "质量保障-lock-lifecycle",
+      "task_type": "质量保障",
+      "capability_family": "多进程独占与退出释放",
+      "subject": "lock-lifecycle",
+      "state": "restart",
+      "invariant": "incomplete final frame truncated; complete corruption fails closed",
+      "observable": "多进程独占与退出释放的公开结果可通过laminad startup核对",
+      "primary_mechanism": "resource_lifecycle",
+      "workflow_ids": [
+        "restart"
+      ],
+      "source_anchors": [
+        "internal/journal/wal.go",
+        "internal/engine/database.go",
+        "internal/engine/replay.go"
+      ],
+      "existing_touch_points": {
+        "files": [
+          "internal/journal/wal.go",
+          "internal/engine/database.go",
+          "internal/engine/replay.go"
+        ],
+        "functions": [
+          "recover",
+          "Open",
+          "apply"
+        ]
+      }
+    },
+    {
+      "id": "项目维护-compatibility-manual",
+      "task_type": "项目维护",
+      "capability_family": "格式协议与恢复兼容文档",
+      "subject": "compatibility-manual",
+      "state": "restart",
+      "invariant": "incomplete final frame truncated; complete corruption fails closed",
+      "observable": "格式协议与恢复兼容文档的公开结果可通过laminad startup核对",
+      "primary_mechanism": "versioning_audit",
+      "workflow_ids": [
+        "restart"
+      ],
+      "source_anchors": [
+        "internal/journal/wal.go",
+        "internal/engine/database.go",
+        "internal/engine/replay.go"
+      ],
+      "existing_touch_points": {
+        "files": [
+          "internal/journal/wal.go",
+          "internal/engine/database.go",
+          "internal/engine/replay.go"
+        ],
+        "functions": [
+          "recover",
+          "Open",
+          "apply"
+        ]
+      }
+    },
+    {
+      "id": "项目维护-isolation-manual",
+      "task_type": "项目维护",
+      "capability_family": "隔离保证与异常案例文档",
+      "subject": "isolation-manual",
+      "state": "snapshot-read",
+      "invariant": "active transactions retain versions; unsupported timestamp rejected",
+      "observable": "隔离保证与异常案例文档的公开结果可通过POST /query with transaction or at核对",
+      "primary_mechanism": "concurrency",
+      "workflow_ids": [
+        "snapshot-read"
+      ],
+      "source_anchors": [
+        "internal/engine/read.go",
+        "internal/versions/store.go"
+      ],
+      "existing_touch_points": {
+        "files": [
+          "internal/engine/read.go",
+          "internal/versions/store.go"
+        ],
+        "functions": [
+          "Query",
+          "Visible"
+        ]
+      }
+    },
+    {
+      "id": "项目维护-storage-inventory",
+      "task_type": "项目维护",
+      "capability_family": "持久文件与所有权说明",
+      "subject": "storage-inventory",
+      "state": "checkpoint",
+      "invariant": "previous image survives failed replacement",
+      "observable": "持久文件与所有权说明的公开结果可通过POST /checkpoint核对",
+      "primary_mechanism": "resource_lifecycle",
+      "workflow_ids": [
+        "checkpoint"
+      ],
+      "source_anchors": [
+        "internal/engine/maintenance.go",
+        "internal/snapshot/atomic.go"
+      ],
+      "existing_touch_points": {
+        "files": [
+          "internal/engine/maintenance.go",
+          "internal/snapshot/atomic.go"
+        ],
+        "functions": [
+          "Checkpoint",
+          "Write",
+          "Atomic"
+        ]
+      }
+    },
+    {
+      "id": "项目维护-operator-reference",
+      "task_type": "项目维护",
+      "capability_family": "错误处置与恢复入口文档",
+      "subject": "operator-reference",
+      "state": "backup-restore",
+      "invariant": "digest and format validated before startup publishes state",
+      "observable": "错误处置与恢复入口文档的公开结果可通过GET /backup; laminad -restore核对",
+      "primary_mechanism": "recovery_rollback",
+      "workflow_ids": [
+        "backup-restore"
+      ],
+      "source_anchors": [
+        "internal/engine/maintenance.go",
+        "internal/snapshot/image.go"
+      ],
+      "existing_touch_points": {
+        "files": [
+          "internal/engine/maintenance.go",
+          "internal/snapshot/image.go"
+        ],
+        "functions": [
+          "Restore",
+          "Decode",
+          "Validate"
+        ]
+      }
+    },
+    {
+      "id": "项目维护-sql-reference",
+      "task_type": "项目维护",
+      "capability_family": "语法与空值语义参考",
+      "subject": "sql-reference",
+      "state": "sql-execute",
+      "invariant": "syntax errors cannot partially execute; SQL and structured query agree",
+      "observable": "语法与空值语义参考的公开结果可通过POST /sql核对",
+      "primary_mechanism": "policy_rules",
+      "workflow_ids": [
+        "sql-execute"
+      ],
+      "source_anchors": [
+        "internal/syntax/parser.go",
+        "internal/query/bind.go",
+        "internal/query/execute.go"
+      ],
+      "existing_touch_points": {
+        "files": [
+          "internal/syntax/parser.go",
+          "internal/query/bind.go",
+          "internal/query/execute.go"
+        ],
+        "functions": [
+          "Parse",
+          "Bind",
+          "Execute"
+        ]
+      }
+    },
+    {
+      "id": "项目维护-release-notes",
+      "task_type": "项目维护",
+      "capability_family": "可复现基线发布记录",
+      "subject": "release-notes",
+      "state": "txn-write",
+      "invariant": "first committer wins; unique validation against current full resulting state",
+      "observable": "可复现基线发布记录的公开结果可通过POST /transactions/{tx}/put then /commit核对",
+      "primary_mechanism": "versioning_audit",
+      "workflow_ids": [
+        "txn-write"
+      ],
+      "source_anchors": [
+        "internal/engine/transaction.go",
+        "internal/journal/wal.go",
+        "internal/catalog/schema.go"
+      ],
+      "existing_touch_points": {
+        "files": [
+          "internal/engine/transaction.go",
+          "internal/journal/wal.go",
+          "internal/catalog/schema.go"
+        ],
+        "functions": [
+          "Commit",
+          "Append",
+          "Normalize"
+        ]
+      }
+    },
+    {
+      "id": "项目维护-index-guide",
+      "task_type": "项目维护",
+      "capability_family": "历史索引事实与成本说明",
+      "subject": "index-guide",
+      "state": "query-plan",
+      "invariant": "historical snapshot always rechecks visible versions",
+      "observable": "历史索引事实与成本说明的公开结果可通过POST /query with where核对",
+      "primary_mechanism": "ranking_reorder",
+      "workflow_ids": [
+        "query-plan"
+      ],
+      "source_anchors": [
+        "internal/query/plan.go",
+        "internal/engine/read.go",
+        "internal/query/execute.go"
+      ],
+      "existing_touch_points": {
+        "files": [
+          "internal/query/plan.go",
+          "internal/engine/read.go",
+          "internal/query/execute.go"
+        ],
+        "functions": [
+          "Choose",
+          "Query",
+          "Execute"
+        ]
+      }
+    },
+    {
+      "id": "项目维护-limits-manual",
+      "task_type": "项目维护",
+      "capability_family": "内存容量与限制说明",
+      "subject": "limits-manual",
+      "state": "statistics",
+      "invariant": "candidates vs scanned vs returned have distinct meanings",
+      "observable": "内存容量与限制说明的公开结果可通过GET /stats and POST /query核对",
+      "primary_mechanism": "capacity",
+      "workflow_ids": [
+        "statistics"
+      ],
+      "source_anchors": [
+        "internal/engine/stats.go",
+        "internal/query/execute.go"
+      ],
+      "existing_touch_points": {
+        "files": [
+          "internal/engine/stats.go",
+          "internal/query/execute.go"
+        ],
+        "functions": [
+          "Stats",
+          "Execute"
+        ]
+      }
+    },
+    {
+      "id": "项目维护-change-contract",
+      "task_type": "项目维护",
+      "capability_family": "游标水位与提交原子文档",
+      "subject": "change-contract",
+      "state": "changes",
+      "invariant": "no split transaction at page boundary; watermark is last delivered sequence",
+      "observable": "游标水位与提交原子文档的公开结果可通过GET /changes核对",
+      "primary_mechanism": "lineage",
+      "workflow_ids": [
+        "changes"
+      ],
+      "source_anchors": [
+        "internal/engine/changes.go",
+        "internal/journal/record.go",
+        "internal/journal/wal.go"
+      ],
+      "existing_touch_points": {
+        "files": [
+          "internal/engine/changes.go",
+          "internal/journal/record.go",
+          "internal/journal/wal.go"
+        ],
+        "functions": [
+          "Changes",
+          "Append"
+        ]
+      }
+    },
+    {
+      "id": "项目维护-retention-manual",
+      "task_type": "项目维护",
+      "capability_family": "历史读承诺与回收文档",
+      "subject": "retention-manual",
+      "state": "vacuum",
+      "invariant": "lowest active read timestamp limits pruning",
+      "observable": "历史读承诺与回收文档的公开结果可通过POST /vacuum核对",
+      "primary_mechanism": "resource_lifecycle",
+      "workflow_ids": [
+        "vacuum"
+      ],
+      "source_anchors": [
+        "internal/engine/maintenance.go",
+        "internal/versions/vacuum.go",
+        "internal/index/registry.go"
+      ],
+      "existing_touch_points": {
+        "files": [
+          "internal/engine/maintenance.go",
+          "internal/versions/vacuum.go",
+          "internal/index/registry.go"
+        ],
+        "functions": [
+          "Vacuum",
+          "Build"
+        ]
+      }
+    },
+    {
+      "id": "项目维护-schema-reference",
+      "task_type": "项目维护",
+      "capability_family": "目录规则与行归一化文档",
+      "subject": "schema-reference",
+      "state": "catalog-create",
+      "invariant": "invalid schema leaves no relation",
+      "observable": "目录规则与行归一化文档的公开结果可通过POST /relations核对",
+      "primary_mechanism": "policy_rules",
+      "workflow_ids": [
+        "catalog-create"
+      ],
+      "source_anchors": [
+        "internal/catalog/schema.go",
+        "internal/engine/constraints.go"
+      ],
+      "existing_touch_points": {
+        "files": [
+          "internal/catalog/schema.go",
+          "internal/engine/constraints.go"
+        ],
+        "functions": [
+          "Normalize",
+          "CreateRelation"
+        ]
+      }
+    },
+    {
+      "id": "项目维护-transaction-examples",
+      "task_type": "项目维护",
+      "capability_family": "会话写集与关闭示例",
+      "subject": "transaction-examples",
+      "state": "transaction-close",
+      "invariant": "discard private writes, retain no pins",
+      "observable": "会话写集与关闭示例的公开结果可通过POST /transactions/{tx}/rollback核对",
+      "primary_mechanism": "state_machine",
+      "workflow_ids": [
+        "transaction-close"
+      ],
+      "source_anchors": [
+        "internal/engine/transaction.go",
+        "internal/engine/read.go"
+      ],
+      "existing_touch_points": {
+        "files": [
+          "internal/engine/transaction.go",
+          "internal/engine/read.go"
+        ],
+        "functions": [
+          "Rollback",
+          "Begin",
+          "Query"
+        ]
+      }
+    },
+    {
+      "id": "项目维护-build-support",
+      "task_type": "项目维护",
+      "capability_family": "构建矩阵与平台支持声明",
+      "subject": "build-support",
+      "state": "restart",
+      "invariant": "incomplete final frame truncated; complete corruption fails closed",
+      "observable": "构建矩阵与平台支持声明的公开结果可通过laminad startup核对",
+      "primary_mechanism": "resource_lifecycle",
+      "workflow_ids": [
+        "restart"
+      ],
+      "source_anchors": [
+        "internal/journal/wal.go",
+        "internal/engine/database.go",
+        "internal/engine/replay.go"
+      ],
+      "existing_touch_points": {
+        "files": [
+          "internal/journal/wal.go",
+          "internal/engine/database.go",
+          "internal/engine/replay.go"
+        ],
+        "functions": [
+          "recover",
+          "Open",
+          "apply"
+        ]
+      }
+    },
+    {
+      "id": "项目维护-backup-format",
+      "task_type": "项目维护",
+      "capability_family": "可移植图像格式规范",
+      "subject": "backup-format",
+      "state": "backup-restore",
+      "invariant": "digest and format validated before startup publishes state",
+      "observable": "可移植图像格式规范的公开结果可通过GET /backup; laminad -restore核对",
+      "primary_mechanism": "export_freeze",
+      "workflow_ids": [
+        "backup-restore"
+      ],
+      "source_anchors": [
+        "internal/engine/maintenance.go",
+        "internal/snapshot/image.go"
+      ],
+      "existing_touch_points": {
+        "files": [
+          "internal/engine/maintenance.go",
+          "internal/snapshot/image.go"
+        ],
+        "functions": [
+          "Restore",
+          "Decode",
+          "Validate"
+        ]
+      }
+    },
+    {
+      "id": "项目维护-contribution-guide",
+      "task_type": "项目维护",
+      "capability_family": "数据库语义变更贡献约定",
+      "subject": "contribution-guide",
+      "state": "txn-conflict",
+      "invariant": "no partial commit or sequence advance on conflict",
+      "observable": "数据库语义变更贡献约定的公开结果可通过POST /transactions/{tx}/commit核对",
+      "primary_mechanism": "concurrency",
+      "workflow_ids": [
+        "txn-conflict"
+      ],
+      "source_anchors": [
+        "internal/engine/transaction.go",
+        "internal/engine/constraints.go",
+        "internal/versions/store.go"
+      ],
+      "existing_touch_points": {
+        "files": [
+          "internal/engine/transaction.go",
+          "internal/engine/constraints.go",
+          "internal/versions/store.go"
+        ],
+        "functions": [
+          "Commit",
+          "unique",
+          "Latest"
+        ]
+      }
+    },
+    {
+      "id": "技术讨论-serializability-decision",
+      "task_type": "技术讨论",
+      "capability_family": "快照隔离写偏差与更强保证代价",
+      "subject": "serializability-decision",
+      "state": "txn-conflict",
+      "invariant": "no partial commit or sequence advance on conflict",
+      "observable": "快照隔离写偏差与更强保证代价的公开结果可通过POST /transactions/{tx}/commit核对",
+      "primary_mechanism": "concurrency",
+      "workflow_ids": [
+        "txn-conflict"
+      ],
+      "source_anchors": [
+        "internal/engine/transaction.go",
+        "internal/engine/constraints.go",
+        "internal/versions/store.go"
+      ],
+      "existing_touch_points": {
+        "files": [
+          "internal/engine/transaction.go",
+          "internal/engine/constraints.go",
+          "internal/versions/store.go"
+        ],
+        "functions": [
+          "Commit",
+          "unique",
+          "Latest"
+        ]
+      }
+    },
+    {
+      "id": "技术讨论-planner-economics",
+      "task_type": "技术讨论",
+      "capability_family": "历史索引膨胀与选路成本",
+      "subject": "planner-economics",
+      "state": "query-plan",
+      "invariant": "historical snapshot always rechecks visible versions",
+      "observable": "历史索引膨胀与选路成本的公开结果可通过POST /query with where核对",
+      "primary_mechanism": "ranking_reorder",
+      "workflow_ids": [
+        "query-plan"
+      ],
+      "source_anchors": [
+        "internal/query/plan.go",
+        "internal/engine/read.go",
+        "internal/query/execute.go"
+      ],
+      "existing_touch_points": {
+        "files": [
+          "internal/query/plan.go",
+          "internal/engine/read.go",
+          "internal/query/execute.go"
+        ],
+        "functions": [
+          "Choose",
+          "Query",
+          "Execute"
+        ]
+      }
+    },
+    {
+      "id": "技术讨论-checkpoint-latency",
+      "task_type": "技术讨论",
+      "capability_family": "检查点并发策略决策",
+      "subject": "checkpoint-latency",
+      "state": "checkpoint",
+      "invariant": "previous image survives failed replacement",
+      "observable": "检查点并发策略决策的公开结果可通过POST /checkpoint核对",
+      "primary_mechanism": "concurrency",
+      "workflow_ids": [
+        "checkpoint"
+      ],
+      "source_anchors": [
+        "internal/engine/maintenance.go",
+        "internal/snapshot/atomic.go"
+      ],
+      "existing_touch_points": {
+        "files": [
+          "internal/engine/maintenance.go",
+          "internal/snapshot/atomic.go"
+        ],
+        "functions": [
+          "Checkpoint",
+          "Write",
+          "Atomic"
+        ]
+      }
+    },
+    {
+      "id": "技术讨论-wal-recovery-design",
+      "task_type": "技术讨论",
+      "capability_family": "日志保留与恢复证明",
+      "subject": "wal-recovery-design",
+      "state": "restart",
+      "invariant": "incomplete final frame truncated; complete corruption fails closed",
+      "observable": "日志保留与恢复证明的公开结果可通过laminad startup核对",
+      "primary_mechanism": "recovery_rollback",
+      "workflow_ids": [
+        "restart"
+      ],
+      "source_anchors": [
+        "internal/journal/wal.go",
+        "internal/engine/database.go",
+        "internal/engine/replay.go"
+      ],
+      "existing_touch_points": {
+        "files": [
+          "internal/journal/wal.go",
+          "internal/engine/database.go",
+          "internal/engine/replay.go"
+        ],
+        "functions": [
+          "recover",
+          "Open",
+          "apply"
+        ]
+      }
+    },
+    {
+      "id": "技术讨论-backup-consistency",
+      "task_type": "技术讨论",
+      "capability_family": "备份冻结粒度与内存预算",
+      "subject": "backup-consistency",
+      "state": "backup-restore",
+      "invariant": "digest and format validated before startup publishes state",
+      "observable": "备份冻结粒度与内存预算的公开结果可通过GET /backup; laminad -restore核对",
+      "primary_mechanism": "export_freeze",
+      "workflow_ids": [
+        "backup-restore"
+      ],
+      "source_anchors": [
+        "internal/engine/maintenance.go",
+        "internal/snapshot/image.go"
+      ],
+      "existing_touch_points": {
+        "files": [
+          "internal/engine/maintenance.go",
+          "internal/snapshot/image.go"
+        ],
+        "functions": [
+          "Restore",
+          "Decode",
+          "Validate"
+        ]
+      }
+    },
+    {
+      "id": "技术讨论-index-null-semantics",
+      "task_type": "技术讨论",
+      "capability_family": "唯一索引空值语义与兼容",
+      "subject": "index-null-semantics",
+      "state": "index-build",
+      "invariant": "failed unique build leaves no catalog entry",
+      "observable": "唯一索引空值语义与兼容的公开结果可通过POST /indexes核对",
+      "primary_mechanism": "policy_rules",
+      "workflow_ids": [
+        "index-build"
+      ],
+      "source_anchors": [
+        "internal/engine/constraints.go",
+        "internal/index/registry.go"
+      ],
+      "existing_touch_points": {
+        "files": [
+          "internal/engine/constraints.go",
+          "internal/index/registry.go"
+        ],
+        "functions": [
+          "CreateIndex",
+          "Build"
+        ]
+      }
+    },
+    {
+      "id": "技术讨论-version-reclamation",
+      "task_type": "技术讨论",
+      "capability_family": "水位与墓碑回收代价",
+      "subject": "version-reclamation",
+      "state": "vacuum",
+      "invariant": "lowest active read timestamp limits pruning",
+      "observable": "水位与墓碑回收代价的公开结果可通过POST /vacuum核对",
+      "primary_mechanism": "resource_lifecycle",
+      "workflow_ids": [
+        "vacuum"
+      ],
+      "source_anchors": [
+        "internal/engine/maintenance.go",
+        "internal/versions/vacuum.go",
+        "internal/index/registry.go"
+      ],
+      "existing_touch_points": {
+        "files": [
+          "internal/engine/maintenance.go",
+          "internal/versions/vacuum.go",
+          "internal/index/registry.go"
+        ],
+        "functions": [
+          "Vacuum",
+          "Build"
+        ]
+      }
+    },
+    {
+      "id": "技术讨论-query-materialization",
+      "task_type": "技术讨论",
+      "capability_family": "物化与流式执行约束",
+      "subject": "query-materialization",
+      "state": "sql-execute",
+      "invariant": "syntax errors cannot partially execute; SQL and structured query agree",
+      "observable": "物化与流式执行约束的公开结果可通过POST /sql核对",
+      "primary_mechanism": "capacity",
+      "workflow_ids": [
+        "sql-execute"
+      ],
+      "source_anchors": [
+        "internal/syntax/parser.go",
+        "internal/query/bind.go",
+        "internal/query/execute.go"
+      ],
+      "existing_touch_points": {
+        "files": [
+          "internal/syntax/parser.go",
+          "internal/query/bind.go",
+          "internal/query/execute.go"
+        ],
+        "functions": [
+          "Parse",
+          "Bind",
+          "Execute"
+        ]
+      }
+    },
+    {
+      "id": "技术讨论-schema-versioning",
+      "task_type": "技术讨论",
+      "capability_family": "历史目录绑定策略",
+      "subject": "schema-versioning",
+      "state": "catalog-create",
+      "invariant": "invalid schema leaves no relation",
+      "observable": "历史目录绑定策略的公开结果可通过POST /relations核对",
+      "primary_mechanism": "versioning_audit",
+      "workflow_ids": [
+        "catalog-create"
+      ],
+      "source_anchors": [
+        "internal/catalog/schema.go",
+        "internal/engine/constraints.go"
+      ],
+      "existing_touch_points": {
+        "files": [
+          "internal/catalog/schema.go",
+          "internal/engine/constraints.go"
+        ],
+        "functions": [
+          "Normalize",
+          "CreateRelation"
+        ]
+      }
+    },
+    {
+      "id": "技术讨论-replication-watermark",
+      "task_type": "技术讨论",
+      "capability_family": "订阅消费与持久确认边界",
+      "subject": "replication-watermark",
+      "state": "changes",
+      "invariant": "no split transaction at page boundary; watermark is last delivered sequence",
+      "observable": "订阅消费与持久确认边界的公开结果可通过GET /changes核对",
+      "primary_mechanism": "lineage",
+      "workflow_ids": [
+        "changes"
+      ],
+      "source_anchors": [
+        "internal/engine/changes.go",
+        "internal/journal/record.go",
+        "internal/journal/wal.go"
+      ],
+      "existing_touch_points": {
+        "files": [
+          "internal/engine/changes.go",
+          "internal/journal/record.go",
+          "internal/journal/wal.go"
+        ],
+        "functions": [
+          "Changes",
+          "Append"
+        ]
+      }
+    },
+    {
+      "id": "技术讨论-transaction-admission",
+      "task_type": "技术讨论",
+      "capability_family": "长读与写集资源公平性",
+      "subject": "transaction-admission",
+      "state": "txn-write",
+      "invariant": "first committer wins; unique validation against current full resulting state",
+      "observable": "长读与写集资源公平性的公开结果可通过POST /transactions/{tx}/put then /commit核对",
+      "primary_mechanism": "capacity",
+      "workflow_ids": [
+        "txn-write"
+      ],
+      "source_anchors": [
+        "internal/engine/transaction.go",
+        "internal/journal/wal.go",
+        "internal/catalog/schema.go"
+      ],
+      "existing_touch_points": {
+        "files": [
+          "internal/engine/transaction.go",
+          "internal/journal/wal.go",
+          "internal/catalog/schema.go"
+        ],
+        "functions": [
+          "Commit",
+          "Append",
+          "Normalize"
+        ]
+      }
+    },
+    {
+      "id": "技术讨论-sql-subset",
+      "task_type": "技术讨论",
+      "capability_family": "语法扩展与用户可解释性",
+      "subject": "sql-subset",
+      "state": "sql-execute",
+      "invariant": "syntax errors cannot partially execute; SQL and structured query agree",
+      "observable": "语法扩展与用户可解释性的公开结果可通过POST /sql核对",
+      "primary_mechanism": "policy_rules",
+      "workflow_ids": [
+        "sql-execute"
+      ],
+      "source_anchors": [
+        "internal/syntax/parser.go",
+        "internal/query/bind.go",
+        "internal/query/execute.go"
+      ],
+      "existing_touch_points": {
+        "files": [
+          "internal/syntax/parser.go",
+          "internal/query/bind.go",
+          "internal/query/execute.go"
+        ],
+        "functions": [
+          "Parse",
+          "Bind",
+          "Execute"
+        ]
+      }
+    },
+    {
+      "id": "技术讨论-lock-granularity",
+      "task_type": "技术讨论",
+      "capability_family": "读写锁与不可变发布取舍",
+      "subject": "lock-granularity",
+      "state": "snapshot-read",
+      "invariant": "active transactions retain versions; unsupported timestamp rejected",
+      "observable": "读写锁与不可变发布取舍的公开结果可通过POST /query with transaction or at核对",
+      "primary_mechanism": "concurrency",
+      "workflow_ids": [
+        "snapshot-read"
+      ],
+      "source_anchors": [
+        "internal/engine/read.go",
+        "internal/versions/store.go"
+      ],
+      "existing_touch_points": {
+        "files": [
+          "internal/engine/read.go",
+          "internal/versions/store.go"
+        ],
+        "functions": [
+          "Query",
+          "Visible"
+        ]
+      }
+    },
+    {
+      "id": "技术讨论-recovery-checksum",
+      "task_type": "技术讨论",
+      "capability_family": "尾部不完整与静默损坏边界",
+      "subject": "recovery-checksum",
+      "state": "restart",
+      "invariant": "incomplete final frame truncated; complete corruption fails closed",
+      "observable": "尾部不完整与静默损坏边界的公开结果可通过laminad startup核对",
+      "primary_mechanism": "error_propagation",
+      "workflow_ids": [
+        "restart"
+      ],
+      "source_anchors": [
+        "internal/journal/wal.go",
+        "internal/engine/database.go",
+        "internal/engine/replay.go"
+      ],
+      "existing_touch_points": {
+        "files": [
+          "internal/journal/wal.go",
+          "internal/engine/database.go",
+          "internal/engine/replay.go"
+        ],
+        "functions": [
+          "recover",
+          "Open",
+          "apply"
+        ]
+      }
+    },
+    {
+      "id": "技术讨论-storage-evolution",
+      "task_type": "技术讨论",
+      "capability_family": "内存内核到分页引擎演进",
+      "subject": "storage-evolution",
+      "state": "checkpoint",
+      "invariant": "previous image survives failed replacement",
+      "observable": "内存内核到分页引擎演进的公开结果可通过POST /checkpoint核对",
+      "primary_mechanism": "resource_lifecycle",
+      "workflow_ids": [
+        "checkpoint"
+      ],
+      "source_anchors": [
+        "internal/engine/maintenance.go",
+        "internal/snapshot/atomic.go"
+      ],
+      "existing_touch_points": {
+        "files": [
+          "internal/engine/maintenance.go",
+          "internal/snapshot/atomic.go"
+        ],
+        "functions": [
+          "Checkpoint",
+          "Write",
+          "Atomic"
+        ]
+      }
+    },
+    {
+      "id": "问题排查与诊断-candidate-inflation",
+      "task_type": "问题排查与诊断",
+      "capability_family": "索引候选多但结果少的真实观测",
+      "subject": "candidate-inflation",
+      "state": "query-plan",
+      "invariant": "historical snapshot always rechecks visible versions",
+      "observable": "索引候选多但结果少的真实观测的公开结果可通过POST /query with where核对",
+      "primary_mechanism": "snapshot_consistency",
+      "workflow_ids": [
+        "query-plan"
+      ],
+      "source_anchors": [
+        "internal/query/plan.go",
+        "internal/engine/read.go",
+        "internal/query/execute.go"
+      ],
+      "existing_touch_points": {
+        "files": [
+          "internal/query/plan.go",
+          "internal/engine/read.go",
+          "internal/query/execute.go"
+        ],
+        "functions": [
+          "Choose",
+          "Query",
+          "Execute"
+        ]
+      }
+    },
+    {
+      "id": "问题排查与诊断-pinned-vacuum",
+      "task_type": "问题排查与诊断",
+      "capability_family": "已回收但版本数量仍高的真实观测",
+      "subject": "pinned-vacuum",
+      "state": "vacuum",
+      "invariant": "lowest active read timestamp limits pruning",
+      "observable": "已回收但版本数量仍高的真实观测的公开结果可通过POST /vacuum核对",
+      "primary_mechanism": "resource_lifecycle",
+      "workflow_ids": [
+        "vacuum"
+      ],
+      "source_anchors": [
+        "internal/engine/maintenance.go",
+        "internal/versions/vacuum.go",
+        "internal/index/registry.go"
+      ],
+      "existing_touch_points": {
+        "files": [
+          "internal/engine/maintenance.go",
+          "internal/versions/vacuum.go",
+          "internal/index/registry.go"
+        ],
+        "functions": [
+          "Vacuum",
+          "Build"
+        ]
+      }
+    },
+    {
+      "id": "问题排查与诊断-snapshot-conflict",
+      "task_type": "问题排查与诊断",
+      "capability_family": "长事务读旧值后提交冲突",
+      "subject": "snapshot-conflict",
+      "state": "txn-conflict",
+      "invariant": "no partial commit or sequence advance on conflict",
+      "observable": "长事务读旧值后提交冲突的公开结果可通过POST /transactions/{tx}/commit核对",
+      "primary_mechanism": "concurrency",
+      "workflow_ids": [
+        "txn-conflict"
+      ],
+      "source_anchors": [
+        "internal/engine/transaction.go",
+        "internal/engine/constraints.go",
+        "internal/versions/store.go"
+      ],
+      "existing_touch_points": {
+        "files": [
+          "internal/engine/transaction.go",
+          "internal/engine/constraints.go",
+          "internal/versions/store.go"
+        ],
+        "functions": [
+          "Commit",
+          "unique",
+          "Latest"
+        ]
+      }
+    },
+    {
+      "id": "问题排查与诊断-unique-late-conflict",
+      "task_type": "问题排查与诊断",
+      "capability_family": "不同主键的延迟唯一冲突",
+      "subject": "unique-late-conflict",
+      "state": "index-build",
+      "invariant": "failed unique build leaves no catalog entry",
+      "observable": "不同主键的延迟唯一冲突的公开结果可通过POST /indexes核对",
+      "primary_mechanism": "batch_transaction",
+      "workflow_ids": [
+        "index-build"
+      ],
+      "source_anchors": [
+        "internal/engine/constraints.go",
+        "internal/index/registry.go"
+      ],
+      "existing_touch_points": {
+        "files": [
+          "internal/engine/constraints.go",
+          "internal/index/registry.go"
+        ],
+        "functions": [
+          "CreateIndex",
+          "Build"
+        ]
+      }
+    },
+    {
+      "id": "问题排查与诊断-restore-history",
+      "task_type": "问题排查与诊断",
+      "capability_family": "还原后旧变更游标不可用",
+      "subject": "restore-history",
+      "state": "changes",
+      "invariant": "no split transaction at page boundary; watermark is last delivered sequence",
+      "observable": "还原后旧变更游标不可用的公开结果可通过GET /changes核对",
+      "primary_mechanism": "lineage",
+      "workflow_ids": [
+        "changes"
+      ],
+      "source_anchors": [
+        "internal/engine/changes.go",
+        "internal/journal/record.go",
+        "internal/journal/wal.go"
+      ],
+      "existing_touch_points": {
+        "files": [
+          "internal/engine/changes.go",
+          "internal/journal/record.go",
+          "internal/journal/wal.go"
+        ],
+        "functions": [
+          "Changes",
+          "Append"
+        ]
+      }
+    },
+    {
+      "id": "问题排查与诊断-restart-tail",
+      "task_type": "问题排查与诊断",
+      "capability_family": "不完整尾部恢复字节统计",
+      "subject": "restart-tail",
+      "state": "restart",
+      "invariant": "incomplete final frame truncated; complete corruption fails closed",
+      "observable": "不完整尾部恢复字节统计的公开结果可通过laminad startup核对",
+      "primary_mechanism": "recovery_rollback",
+      "workflow_ids": [
+        "restart"
+      ],
+      "source_anchors": [
+        "internal/journal/wal.go",
+        "internal/engine/database.go",
+        "internal/engine/replay.go"
+      ],
+      "existing_touch_points": {
+        "files": [
+          "internal/journal/wal.go",
+          "internal/engine/database.go",
+          "internal/engine/replay.go"
+        ],
+        "functions": [
+          "recover",
+          "Open",
+          "apply"
+        ]
+      }
+    },
+    {
+      "id": "问题排查与诊断-checkpoint-writer",
+      "task_type": "问题排查与诊断",
+      "capability_family": "检查点期间写请求延迟",
+      "subject": "checkpoint-writer",
+      "state": "checkpoint",
+      "invariant": "previous image survives failed replacement",
+      "observable": "检查点期间写请求延迟的公开结果可通过POST /checkpoint核对",
+      "primary_mechanism": "concurrency",
+      "workflow_ids": [
+        "checkpoint"
+      ],
+      "source_anchors": [
+        "internal/engine/maintenance.go",
+        "internal/snapshot/atomic.go"
+      ],
+      "existing_touch_points": {
+        "files": [
+          "internal/engine/maintenance.go",
+          "internal/snapshot/atomic.go"
+        ],
+        "functions": [
+          "Checkpoint",
+          "Write",
+          "Atomic"
+        ]
+      }
+    },
+    {
+      "id": "问题排查与诊断-backup-growth",
+      "task_type": "问题排查与诊断",
+      "capability_family": "长版本链导致镜像增长",
+      "subject": "backup-growth",
+      "state": "backup-restore",
+      "invariant": "digest and format validated before startup publishes state",
+      "observable": "长版本链导致镜像增长的公开结果可通过GET /backup; laminad -restore核对",
+      "primary_mechanism": "capacity",
+      "workflow_ids": [
+        "backup-restore"
+      ],
+      "source_anchors": [
+        "internal/engine/maintenance.go",
+        "internal/snapshot/image.go"
+      ],
+      "existing_touch_points": {
+        "files": [
+          "internal/engine/maintenance.go",
+          "internal/snapshot/image.go"
+        ],
+        "functions": [
+          "Restore",
+          "Decode",
+          "Validate"
+        ]
+      }
+    },
+    {
+      "id": "问题排查与诊断-sql-null-count",
+      "task_type": "问题排查与诊断",
+      "capability_family": "两个计数结果不同的真实语义",
+      "subject": "sql-null-count",
+      "state": "sql-execute",
+      "invariant": "syntax errors cannot partially execute; SQL and structured query agree",
+      "observable": "两个计数结果不同的真实语义的公开结果可通过POST /sql核对",
+      "primary_mechanism": "policy_rules",
+      "workflow_ids": [
+        "sql-execute"
+      ],
+      "source_anchors": [
+        "internal/syntax/parser.go",
+        "internal/query/bind.go",
+        "internal/query/execute.go"
+      ],
+      "existing_touch_points": {
+        "files": [
+          "internal/syntax/parser.go",
+          "internal/query/bind.go",
+          "internal/query/execute.go"
+        ],
+        "functions": [
+          "Parse",
+          "Bind",
+          "Execute"
+        ]
+      }
+    },
+    {
+      "id": "问题排查与诊断-read-own-index",
+      "task_type": "问题排查与诊断",
+      "capability_family": "私有写集使计划退回扫描",
+      "subject": "read-own-index",
+      "state": "snapshot-read",
+      "invariant": "active transactions retain versions; unsupported timestamp rejected",
+      "observable": "私有写集使计划退回扫描的公开结果可通过POST /query with transaction or at核对",
+      "primary_mechanism": "snapshot_consistency",
+      "workflow_ids": [
+        "snapshot-read"
+      ],
+      "source_anchors": [
+        "internal/engine/read.go",
+        "internal/versions/store.go"
+      ],
+      "existing_touch_points": {
+        "files": [
+          "internal/engine/read.go",
+          "internal/versions/store.go"
+        ],
+        "functions": [
+          "Query",
+          "Visible"
+        ]
+      }
+    },
+    {
+      "id": "问题排查与诊断-aggregate-overflow",
+      "task_type": "问题排查与诊断",
+      "capability_family": "求和溢出与原数据完整性",
+      "subject": "aggregate-overflow",
+      "state": "sql-execute",
+      "invariant": "syntax errors cannot partially execute; SQL and structured query agree",
+      "observable": "求和溢出与原数据完整性的公开结果可通过POST /sql核对",
+      "primary_mechanism": "capacity",
+      "workflow_ids": [
+        "sql-execute"
+      ],
+      "source_anchors": [
+        "internal/syntax/parser.go",
+        "internal/query/bind.go",
+        "internal/query/execute.go"
+      ],
+      "existing_touch_points": {
+        "files": [
+          "internal/syntax/parser.go",
+          "internal/query/bind.go",
+          "internal/query/execute.go"
+        ],
+        "functions": [
+          "Parse",
+          "Bind",
+          "Execute"
+        ]
+      }
+    },
+    {
+      "id": "问题排查与诊断-transaction-cap",
+      "task_type": "问题排查与诊断",
+      "capability_family": "未关闭会话造成容量拒绝",
+      "subject": "transaction-cap",
+      "state": "transaction-close",
+      "invariant": "discard private writes, retain no pins",
+      "observable": "未关闭会话造成容量拒绝的公开结果可通过POST /transactions/{tx}/rollback核对",
+      "primary_mechanism": "resource_lifecycle",
+      "workflow_ids": [
+        "transaction-close"
+      ],
+      "source_anchors": [
+        "internal/engine/transaction.go",
+        "internal/engine/read.go"
+      ],
+      "existing_touch_points": {
+        "files": [
+          "internal/engine/transaction.go",
+          "internal/engine/read.go"
+        ],
+        "functions": [
+          "Rollback",
+          "Begin",
+          "Query"
+        ]
+      }
+    },
+    {
+      "id": "问题排查与诊断-catalog-time",
+      "task_type": "问题排查与诊断",
+      "capability_family": "旧会话无法使用后来关系",
+      "subject": "catalog-time",
+      "state": "catalog-create",
+      "invariant": "invalid schema leaves no relation",
+      "observable": "旧会话无法使用后来关系的公开结果可通过POST /relations核对",
+      "primary_mechanism": "versioning_audit",
+      "workflow_ids": [
+        "catalog-create"
+      ],
+      "source_anchors": [
+        "internal/catalog/schema.go",
+        "internal/engine/constraints.go"
+      ],
+      "existing_touch_points": {
+        "files": [
+          "internal/catalog/schema.go",
+          "internal/engine/constraints.go"
+        ],
+        "functions": [
+          "Normalize",
+          "CreateRelation"
+        ]
+      }
+    },
+    {
+      "id": "问题排查与诊断-index-history",
+      "task_type": "问题排查与诊断",
+      "capability_family": "新索引对更早快照不参与计划",
+      "subject": "index-history",
+      "state": "query-plan",
+      "invariant": "historical snapshot always rechecks visible versions",
+      "observable": "新索引对更早快照不参与计划的公开结果可通过POST /query with where核对",
+      "primary_mechanism": "versioning_audit",
+      "workflow_ids": [
+        "query-plan"
+      ],
+      "source_anchors": [
+        "internal/query/plan.go",
+        "internal/engine/read.go",
+        "internal/query/execute.go"
+      ],
+      "existing_touch_points": {
+        "files": [
+          "internal/query/plan.go",
+          "internal/engine/read.go",
+          "internal/query/execute.go"
+        ],
+        "functions": [
+          "Choose",
+          "Query",
+          "Execute"
+        ]
+      }
+    },
+    {
+      "id": "问题排查与诊断-directory-lock",
+      "task_type": "问题排查与诊断",
+      "capability_family": "同目录第二实例启动拒绝",
+      "subject": "directory-lock",
+      "state": "restart",
+      "invariant": "incomplete final frame truncated; complete corruption fails closed",
+      "observable": "同目录第二实例启动拒绝的公开结果可通过laminad startup核对",
+      "primary_mechanism": "resource_lifecycle",
+      "workflow_ids": [
+        "restart"
+      ],
+      "source_anchors": [
+        "internal/journal/wal.go",
+        "internal/engine/database.go",
+        "internal/engine/replay.go"
+      ],
+      "existing_touch_points": {
+        "files": [
+          "internal/journal/wal.go",
+          "internal/engine/database.go",
+          "internal/engine/replay.go"
+        ],
+        "functions": [
+          "recover",
+          "Open",
+          "apply"
+        ]
+      }
+    },
+    {
+      "id": "部署运维-container-volume",
+      "task_type": "部署运维",
+      "capability_family": "非特权容器持久卷恢复",
+      "subject": "container-volume",
+      "state": "restart",
+      "invariant": "incomplete final frame truncated; complete corruption fails closed",
+      "observable": "非特权容器持久卷恢复的公开结果可通过laminad startup核对",
+      "primary_mechanism": "resource_lifecycle",
+      "workflow_ids": [
+        "restart"
+      ],
+      "source_anchors": [
+        "internal/journal/wal.go",
+        "internal/engine/database.go",
+        "internal/engine/replay.go"
+      ],
+      "existing_touch_points": {
+        "files": [
+          "internal/journal/wal.go",
+          "internal/engine/database.go",
+          "internal/engine/replay.go"
+        ],
+        "functions": [
+          "recover",
+          "Open",
+          "apply"
+        ]
+      }
+    },
+    {
+      "id": "部署运维-bounded-recovery",
+      "task_type": "部署运维",
+      "capability_family": "恢复演练与发布回退运行单",
+      "subject": "bounded-recovery",
+      "state": "backup-restore",
+      "invariant": "digest and format validated before startup publishes state",
+      "observable": "恢复演练与发布回退运行单的公开结果可通过GET /backup; laminad -restore核对",
+      "primary_mechanism": "recovery_rollback",
+      "workflow_ids": [
+        "backup-restore"
+      ],
+      "source_anchors": [
+        "internal/engine/maintenance.go",
+        "internal/snapshot/image.go"
+      ],
+      "existing_touch_points": {
+        "files": [
+          "internal/engine/maintenance.go",
+          "internal/snapshot/image.go"
+        ],
+        "functions": [
+          "Restore",
+          "Decode",
+          "Validate"
+        ]
+      }
+    },
+    {
+      "id": "部署运维-health-lifecycle",
+      "task_type": "部署运维",
+      "capability_family": "启动就绪与关闭流量边界",
+      "subject": "health-lifecycle",
+      "state": "txn-write",
+      "invariant": "first committer wins; unique validation against current full resulting state",
+      "observable": "启动就绪与关闭流量边界的公开结果可通过POST /transactions/{tx}/put then /commit核对",
+      "primary_mechanism": "state_machine",
+      "workflow_ids": [
+        "txn-write"
+      ],
+      "source_anchors": [
+        "internal/engine/transaction.go",
+        "internal/journal/wal.go",
+        "internal/catalog/schema.go"
+      ],
+      "existing_touch_points": {
+        "files": [
+          "internal/engine/transaction.go",
+          "internal/journal/wal.go",
+          "internal/catalog/schema.go"
+        ],
+        "functions": [
+          "Commit",
+          "Append",
+          "Normalize"
+        ]
+      }
+    },
+    {
+      "id": "部署运维-capacity-ops",
+      "task_type": "部署运维",
+      "capability_family": "内存预算与服务资源限制",
+      "subject": "capacity-ops",
+      "state": "statistics",
+      "invariant": "candidates vs scanned vs returned have distinct meanings",
+      "observable": "内存预算与服务资源限制的公开结果可通过GET /stats and POST /query核对",
+      "primary_mechanism": "capacity",
+      "workflow_ids": [
+        "statistics"
+      ],
+      "source_anchors": [
+        "internal/engine/stats.go",
+        "internal/query/execute.go"
+      ],
+      "existing_touch_points": {
+        "files": [
+          "internal/engine/stats.go",
+          "internal/query/execute.go"
+        ],
+        "functions": [
+          "Stats",
+          "Execute"
+        ]
+      }
+    },
+    {
+      "id": "部署运维-backup-rotation",
+      "task_type": "部署运维",
+      "capability_family": "备份留存与校验还原演练",
+      "subject": "backup-rotation",
+      "state": "checkpoint",
+      "invariant": "previous image survives failed replacement",
+      "observable": "备份留存与校验还原演练的公开结果可通过POST /checkpoint核对",
+      "primary_mechanism": "export_freeze",
+      "workflow_ids": [
+        "checkpoint"
+      ],
+      "source_anchors": [
+        "internal/engine/maintenance.go",
+        "internal/snapshot/atomic.go"
+      ],
+      "existing_touch_points": {
+        "files": [
+          "internal/engine/maintenance.go",
+          "internal/snapshot/atomic.go"
+        ],
+        "functions": [
+          "Checkpoint",
+          "Write",
+          "Atomic"
+        ]
+      }
+    },
+    {
+      "id": "部署运维-journal-disk",
+      "task_type": "部署运维",
+      "capability_family": "日志磁盘容量与拒写处置",
+      "subject": "journal-disk",
+      "state": "restart",
+      "invariant": "incomplete final frame truncated; complete corruption fails closed",
+      "observable": "日志磁盘容量与拒写处置的公开结果可通过laminad startup核对",
+      "primary_mechanism": "resource_lifecycle",
+      "workflow_ids": [
+        "restart"
+      ],
+      "source_anchors": [
+        "internal/journal/wal.go",
+        "internal/engine/database.go",
+        "internal/engine/replay.go"
+      ],
+      "existing_touch_points": {
+        "files": [
+          "internal/journal/wal.go",
+          "internal/engine/database.go",
+          "internal/engine/replay.go"
+        ],
+        "functions": [
+          "recover",
+          "Open",
+          "apply"
+        ]
+      }
+    },
+    {
+      "id": "部署运维-platform-build",
+      "task_type": "部署运维",
+      "capability_family": "多平台构建与目录锁验证",
+      "subject": "platform-build",
+      "state": "restart",
+      "invariant": "incomplete final frame truncated; complete corruption fails closed",
+      "observable": "多平台构建与目录锁验证的公开结果可通过laminad startup核对",
+      "primary_mechanism": "resource_lifecycle",
+      "workflow_ids": [
+        "restart"
+      ],
+      "source_anchors": [
+        "internal/journal/wal.go",
+        "internal/engine/database.go",
+        "internal/engine/replay.go"
+      ],
+      "existing_touch_points": {
+        "files": [
+          "internal/journal/wal.go",
+          "internal/engine/database.go",
+          "internal/engine/replay.go"
+        ],
+        "functions": [
+          "recover",
+          "Open",
+          "apply"
+        ]
+      }
+    },
+    {
+      "id": "部署运维-shutdown-drain",
+      "task_type": "部署运维",
+      "capability_family": "长请求与停机提交边界",
+      "subject": "shutdown-drain",
+      "state": "txn-conflict",
+      "invariant": "no partial commit or sequence advance on conflict",
+      "observable": "长请求与停机提交边界的公开结果可通过POST /transactions/{tx}/commit核对",
+      "primary_mechanism": "concurrency",
+      "workflow_ids": [
+        "txn-conflict"
+      ],
+      "source_anchors": [
+        "internal/engine/transaction.go",
+        "internal/engine/constraints.go",
+        "internal/versions/store.go"
+      ],
+      "existing_touch_points": {
+        "files": [
+          "internal/engine/transaction.go",
+          "internal/engine/constraints.go",
+          "internal/versions/store.go"
+        ],
+        "functions": [
+          "Commit",
+          "unique",
+          "Latest"
+        ]
+      }
+    },
+    {
+      "id": "部署运维-readiness-probe",
+      "task_type": "部署运维",
+      "capability_family": "恢复期间实例就绪条件",
+      "subject": "readiness-probe",
+      "state": "restart",
+      "invariant": "incomplete final frame truncated; complete corruption fails closed",
+      "observable": "恢复期间实例就绪条件的公开结果可通过laminad startup核对",
+      "primary_mechanism": "state_machine",
+      "workflow_ids": [
+        "restart"
+      ],
+      "source_anchors": [
+        "internal/journal/wal.go",
+        "internal/engine/database.go",
+        "internal/engine/replay.go"
+      ],
+      "existing_touch_points": {
+        "files": [
+          "internal/journal/wal.go",
+          "internal/engine/database.go",
+          "internal/engine/replay.go"
+        ],
+        "functions": [
+          "recover",
+          "Open",
+          "apply"
+        ]
+      }
+    },
+    {
+      "id": "部署运维-restore-permissions",
+      "task_type": "部署运维",
+      "capability_family": "恢复目录所有权与隔离",
+      "subject": "restore-permissions",
+      "state": "backup-restore",
+      "invariant": "digest and format validated before startup publishes state",
+      "observable": "恢复目录所有权与隔离的公开结果可通过GET /backup; laminad -restore核对",
+      "primary_mechanism": "authorization",
+      "workflow_ids": [
+        "backup-restore"
+      ],
+      "source_anchors": [
+        "internal/engine/maintenance.go",
+        "internal/snapshot/image.go"
+      ],
+      "existing_touch_points": {
+        "files": [
+          "internal/engine/maintenance.go",
+          "internal/snapshot/image.go"
+        ],
+        "functions": [
+          "Restore",
+          "Decode",
+          "Validate"
+        ]
+      }
+    },
+    {
+      "id": "部署运维-metrics-export",
+      "task_type": "部署运维",
+      "capability_family": "领域资源指标与监控暴露",
+      "subject": "metrics-export",
+      "state": "statistics",
+      "invariant": "candidates vs scanned vs returned have distinct meanings",
+      "observable": "领域资源指标与监控暴露的公开结果可通过GET /stats and POST /query核对",
+      "primary_mechanism": "versioning_audit",
+      "workflow_ids": [
+        "statistics"
+      ],
+      "source_anchors": [
+        "internal/engine/stats.go",
+        "internal/query/execute.go"
+      ],
+      "existing_touch_points": {
+        "files": [
+          "internal/engine/stats.go",
+          "internal/query/execute.go"
+        ],
+        "functions": [
+          "Stats",
+          "Execute"
+        ]
+      }
+    },
+    {
+      "id": "部署运维-port-binding",
+      "task_type": "部署运维",
+      "capability_family": "部署网络暴露与请求预算",
+      "subject": "port-binding",
+      "state": "txn-write",
+      "invariant": "first committer wins; unique validation against current full resulting state",
+      "observable": "部署网络暴露与请求预算的公开结果可通过POST /transactions/{tx}/put then /commit核对",
+      "primary_mechanism": "capacity",
+      "workflow_ids": [
+        "txn-write"
+      ],
+      "source_anchors": [
+        "internal/engine/transaction.go",
+        "internal/journal/wal.go",
+        "internal/catalog/schema.go"
+      ],
+      "existing_touch_points": {
+        "files": [
+          "internal/engine/transaction.go",
+          "internal/journal/wal.go",
+          "internal/catalog/schema.go"
+        ],
+        "functions": [
+          "Commit",
+          "Append",
+          "Normalize"
+        ]
+      }
+    },
+    {
+      "id": "部署运维-release-package",
+      "task_type": "部署运维",
+      "capability_family": "校验制品与版本追踪",
+      "subject": "release-package",
+      "state": "sql-execute",
+      "invariant": "syntax errors cannot partially execute; SQL and structured query agree",
+      "observable": "校验制品与版本追踪的公开结果可通过POST /sql核对",
+      "primary_mechanism": "versioning_audit",
+      "workflow_ids": [
+        "sql-execute"
+      ],
+      "source_anchors": [
+        "internal/syntax/parser.go",
+        "internal/query/bind.go",
+        "internal/query/execute.go"
+      ],
+      "existing_touch_points": {
+        "files": [
+          "internal/syntax/parser.go",
+          "internal/query/bind.go",
+          "internal/query/execute.go"
+        ],
+        "functions": [
+          "Parse",
+          "Bind",
+          "Execute"
+        ]
+      }
+    },
+    {
+      "id": "部署运维-maintenance-window",
+      "task_type": "部署运维",
+      "capability_family": "回收检查点维护窗口",
+      "subject": "maintenance-window",
+      "state": "vacuum",
+      "invariant": "lowest active read timestamp limits pruning",
+      "observable": "回收检查点维护窗口的公开结果可通过POST /vacuum核对",
+      "primary_mechanism": "resource_lifecycle",
+      "workflow_ids": [
+        "vacuum"
+      ],
+      "source_anchors": [
+        "internal/engine/maintenance.go",
+        "internal/versions/vacuum.go",
+        "internal/index/registry.go"
+      ],
+      "existing_touch_points": {
+        "files": [
+          "internal/engine/maintenance.go",
+          "internal/versions/vacuum.go",
+          "internal/index/registry.go"
+        ],
+        "functions": [
+          "Vacuum",
+          "Build"
+        ]
+      }
+    },
+    {
+      "id": "部署运维-persistent-start",
+      "task_type": "部署运维",
+      "capability_family": "只读根目录与可写数据卷",
+      "subject": "persistent-start",
+      "state": "checkpoint",
+      "invariant": "previous image survives failed replacement",
+      "observable": "只读根目录与可写数据卷的公开结果可通过POST /checkpoint核对",
+      "primary_mechanism": "resource_lifecycle",
+      "workflow_ids": [
+        "checkpoint"
+      ],
+      "source_anchors": [
+        "internal/engine/maintenance.go",
+        "internal/snapshot/atomic.go"
+      ],
+      "existing_touch_points": {
+        "files": [
+          "internal/engine/maintenance.go",
+          "internal/snapshot/atomic.go"
+        ],
+        "functions": [
+          "Checkpoint",
+          "Write",
+          "Atomic"
+        ]
+      }
+    },
+    {
+      "id": "泛Agent需求-recovery-evidence-kit",
+      "task_type": "泛Agent需求",
+      "capability_family": "从真实运行归纳恢复证据包",
+      "subject": "recovery-evidence-kit",
+      "state": "restart",
+      "invariant": "incomplete final frame truncated; complete corruption fails closed",
+      "observable": "从真实运行归纳恢复证据包的公开结果可通过laminad startup核对",
+      "primary_mechanism": "recovery_rollback",
+      "workflow_ids": [
+        "restart"
+      ],
+      "source_anchors": [
+        "internal/journal/wal.go",
+        "internal/engine/database.go",
+        "internal/engine/replay.go"
+      ],
+      "existing_touch_points": {
+        "files": [
+          "internal/journal/wal.go",
+          "internal/engine/database.go",
+          "internal/engine/replay.go"
+        ],
+        "functions": [
+          "recover",
+          "Open",
+          "apply"
+        ]
+      }
+    },
+    {
+      "id": "泛Agent需求-benchmark-corpus",
+      "task_type": "泛Agent需求",
+      "capability_family": "可解释数据库负载语料",
+      "subject": "benchmark-corpus",
+      "state": "query-plan",
+      "invariant": "historical snapshot always rechecks visible versions",
+      "observable": "可解释数据库负载语料的公开结果可通过POST /query with where核对",
+      "primary_mechanism": "ranking_reorder",
+      "workflow_ids": [
+        "query-plan"
+      ],
+      "source_anchors": [
+        "internal/query/plan.go",
+        "internal/engine/read.go",
+        "internal/query/execute.go"
+      ],
+      "existing_touch_points": {
+        "files": [
+          "internal/query/plan.go",
+          "internal/engine/read.go",
+          "internal/query/execute.go"
+        ],
+        "functions": [
+          "Choose",
+          "Query",
+          "Execute"
+        ]
+      }
+    },
+    {
+      "id": "泛Agent需求-compatibility-corpus",
+      "task_type": "泛Agent需求",
+      "capability_family": "跨格式恢复样本索引",
+      "subject": "compatibility-corpus",
+      "state": "backup-restore",
+      "invariant": "digest and format validated before startup publishes state",
+      "observable": "跨格式恢复样本索引的公开结果可通过GET /backup; laminad -restore核对",
+      "primary_mechanism": "versioning_audit",
+      "workflow_ids": [
+        "backup-restore"
+      ],
+      "source_anchors": [
+        "internal/engine/maintenance.go",
+        "internal/snapshot/image.go"
+      ],
+      "existing_touch_points": {
+        "files": [
+          "internal/engine/maintenance.go",
+          "internal/snapshot/image.go"
+        ],
+        "functions": [
+          "Restore",
+          "Decode",
+          "Validate"
+        ]
+      }
+    },
+    {
+      "id": "泛Agent需求-isolation-workbook",
+      "task_type": "泛Agent需求",
+      "capability_family": "并发交错教学材料",
+      "subject": "isolation-workbook",
+      "state": "txn-conflict",
+      "invariant": "no partial commit or sequence advance on conflict",
+      "observable": "并发交错教学材料的公开结果可通过POST /transactions/{tx}/commit核对",
+      "primary_mechanism": "concurrency",
+      "workflow_ids": [
+        "txn-conflict"
+      ],
+      "source_anchors": [
+        "internal/engine/transaction.go",
+        "internal/engine/constraints.go",
+        "internal/versions/store.go"
+      ],
+      "existing_touch_points": {
+        "files": [
+          "internal/engine/transaction.go",
+          "internal/engine/constraints.go",
+          "internal/versions/store.go"
+        ],
+        "functions": [
+          "Commit",
+          "unique",
+          "Latest"
+        ]
+      }
+    },
+    {
+      "id": "泛Agent需求-capacity-estimate",
+      "task_type": "泛Agent需求",
+      "capability_family": "版本保留容量估算材料",
+      "subject": "capacity-estimate",
+      "state": "vacuum",
+      "invariant": "lowest active read timestamp limits pruning",
+      "observable": "版本保留容量估算材料的公开结果可通过POST /vacuum核对",
+      "primary_mechanism": "capacity",
+      "workflow_ids": [
+        "vacuum"
+      ],
+      "source_anchors": [
+        "internal/engine/maintenance.go",
+        "internal/versions/vacuum.go",
+        "internal/index/registry.go"
+      ],
+      "existing_touch_points": {
+        "files": [
+          "internal/engine/maintenance.go",
+          "internal/versions/vacuum.go",
+          "internal/index/registry.go"
+        ],
+        "functions": [
+          "Vacuum",
+          "Build"
+        ]
+      }
+    },
+    {
+      "id": "泛Agent需求-change-audit",
+      "task_type": "泛Agent需求",
+      "capability_family": "提交记录审计与关系血缘清单",
+      "subject": "change-audit",
+      "state": "changes",
+      "invariant": "no split transaction at page boundary; watermark is last delivered sequence",
+      "observable": "提交记录审计与关系血缘清单的公开结果可通过GET /changes核对",
+      "primary_mechanism": "lineage",
+      "workflow_ids": [
+        "changes"
+      ],
+      "source_anchors": [
+        "internal/engine/changes.go",
+        "internal/journal/record.go",
+        "internal/journal/wal.go"
+      ],
+      "existing_touch_points": {
+        "files": [
+          "internal/engine/changes.go",
+          "internal/journal/record.go",
+          "internal/journal/wal.go"
+        ],
+        "functions": [
+          "Changes",
+          "Append"
+        ]
+      }
+    },
+    {
+      "id": "泛Agent需求-sql-training",
+      "task_type": "泛Agent需求",
+      "capability_family": "领域查询练习与预期结果",
+      "subject": "sql-training",
+      "state": "sql-execute",
+      "invariant": "syntax errors cannot partially execute; SQL and structured query agree",
+      "observable": "领域查询练习与预期结果的公开结果可通过POST /sql核对",
+      "primary_mechanism": "policy_rules",
+      "workflow_ids": [
+        "sql-execute"
+      ],
+      "source_anchors": [
+        "internal/syntax/parser.go",
+        "internal/query/bind.go",
+        "internal/query/execute.go"
+      ],
+      "existing_touch_points": {
+        "files": [
+          "internal/syntax/parser.go",
+          "internal/query/bind.go",
+          "internal/query/execute.go"
+        ],
+        "functions": [
+          "Parse",
+          "Bind",
+          "Execute"
+        ]
+      }
+    },
+    {
+      "id": "泛Agent需求-index-advice",
+      "task_type": "泛Agent需求",
+      "capability_family": "真实负载索引建议材料",
+      "subject": "index-advice",
+      "state": "index-build",
+      "invariant": "failed unique build leaves no catalog entry",
+      "observable": "真实负载索引建议材料的公开结果可通过POST /indexes核对",
+      "primary_mechanism": "ranking_reorder",
+      "workflow_ids": [
+        "index-build"
+      ],
+      "source_anchors": [
+        "internal/engine/constraints.go",
+        "internal/index/registry.go"
+      ],
+      "existing_touch_points": {
+        "files": [
+          "internal/engine/constraints.go",
+          "internal/index/registry.go"
+        ],
+        "functions": [
+          "CreateIndex",
+          "Build"
+        ]
+      }
+    },
+    {
+      "id": "泛Agent需求-incident-timeline",
+      "task_type": "泛Agent需求",
+      "capability_family": "日志与提交时序证据时间线",
+      "subject": "incident-timeline",
+      "state": "restart",
+      "invariant": "incomplete final frame truncated; complete corruption fails closed",
+      "observable": "日志与提交时序证据时间线的公开结果可通过laminad startup核对",
+      "primary_mechanism": "time_semantics",
+      "workflow_ids": [
+        "restart"
+      ],
+      "source_anchors": [
+        "internal/journal/wal.go",
+        "internal/engine/database.go",
+        "internal/engine/replay.go"
+      ],
+      "existing_touch_points": {
+        "files": [
+          "internal/journal/wal.go",
+          "internal/engine/database.go",
+          "internal/engine/replay.go"
+        ],
+        "functions": [
+          "recover",
+          "Open",
+          "apply"
+        ]
+      }
+    },
+    {
+      "id": "泛Agent需求-backup-inventory",
+      "task_type": "泛Agent需求",
+      "capability_family": "备份链和保留范围清单",
+      "subject": "backup-inventory",
+      "state": "backup-restore",
+      "invariant": "digest and format validated before startup publishes state",
+      "observable": "备份链和保留范围清单的公开结果可通过GET /backup; laminad -restore核对",
+      "primary_mechanism": "export_freeze",
+      "workflow_ids": [
+        "backup-restore"
+      ],
+      "source_anchors": [
+        "internal/engine/maintenance.go",
+        "internal/snapshot/image.go"
+      ],
+      "existing_touch_points": {
+        "files": [
+          "internal/engine/maintenance.go",
+          "internal/snapshot/image.go"
+        ],
+        "functions": [
+          "Restore",
+          "Decode",
+          "Validate"
+        ]
+      }
+    },
+    {
+      "id": "泛Agent需求-release-comparison",
+      "task_type": "泛Agent需求",
+      "capability_family": "不同环境运行事实对照",
+      "subject": "release-comparison",
+      "state": "checkpoint",
+      "invariant": "previous image survives failed replacement",
+      "observable": "不同环境运行事实对照的公开结果可通过POST /checkpoint核对",
+      "primary_mechanism": "versioning_audit",
+      "workflow_ids": [
+        "checkpoint"
+      ],
+      "source_anchors": [
+        "internal/engine/maintenance.go",
+        "internal/snapshot/atomic.go"
+      ],
+      "existing_touch_points": {
+        "files": [
+          "internal/engine/maintenance.go",
+          "internal/snapshot/atomic.go"
+        ],
+        "functions": [
+          "Checkpoint",
+          "Write",
+          "Atomic"
+        ]
+      }
+    },
+    {
+      "id": "泛Agent需求-transaction-story",
+      "task_type": "泛Agent需求",
+      "capability_family": "读写会话可视化演示素材",
+      "subject": "transaction-story",
+      "state": "snapshot-read",
+      "invariant": "active transactions retain versions; unsupported timestamp rejected",
+      "observable": "读写会话可视化演示素材的公开结果可通过POST /query with transaction or at核对",
+      "primary_mechanism": "state_machine",
+      "workflow_ids": [
+        "snapshot-read"
+      ],
+      "source_anchors": [
+        "internal/engine/read.go",
+        "internal/versions/store.go"
+      ],
+      "existing_touch_points": {
+        "files": [
+          "internal/engine/read.go",
+          "internal/versions/store.go"
+        ],
+        "functions": [
+          "Query",
+          "Visible"
+        ]
+      }
+    },
+    {
+      "id": "泛Agent需求-schema-corpus",
+      "task_type": "泛Agent需求",
+      "capability_family": "合法及拒绝模式样本整理",
+      "subject": "schema-corpus",
+      "state": "catalog-create",
+      "invariant": "invalid schema leaves no relation",
+      "observable": "合法及拒绝模式样本整理的公开结果可通过POST /relations核对",
+      "primary_mechanism": "policy_rules",
+      "workflow_ids": [
+        "catalog-create"
+      ],
+      "source_anchors": [
+        "internal/catalog/schema.go",
+        "internal/engine/constraints.go"
+      ],
+      "existing_touch_points": {
+        "files": [
+          "internal/catalog/schema.go",
+          "internal/engine/constraints.go"
+        ],
+        "functions": [
+          "Normalize",
+          "CreateRelation"
+        ]
+      }
+    },
+    {
+      "id": "泛Agent需求-query-result-kit",
+      "task_type": "泛Agent需求",
+      "capability_family": "空值与聚合结果核验数据",
+      "subject": "query-result-kit",
+      "state": "sql-execute",
+      "invariant": "syntax errors cannot partially execute; SQL and structured query agree",
+      "observable": "空值与聚合结果核验数据的公开结果可通过POST /sql核对",
+      "primary_mechanism": "policy_rules",
+      "workflow_ids": [
+        "sql-execute"
+      ],
+      "source_anchors": [
+        "internal/syntax/parser.go",
+        "internal/query/bind.go",
+        "internal/query/execute.go"
+      ],
+      "existing_touch_points": {
+        "files": [
+          "internal/syntax/parser.go",
+          "internal/query/bind.go",
+          "internal/query/execute.go"
+        ],
+        "functions": [
+          "Parse",
+          "Bind",
+          "Execute"
+        ]
+      }
+    },
+    {
+      "id": "泛Agent需求-resource-budget-kit",
+      "task_type": "泛Agent需求",
+      "capability_family": "资源预算场景材料",
+      "subject": "resource-budget-kit",
+      "state": "statistics",
+      "invariant": "candidates vs scanned vs returned have distinct meanings",
+      "observable": "资源预算场景材料的公开结果可通过GET /stats and POST /query核对",
+      "primary_mechanism": "capacity",
+      "workflow_ids": [
+        "statistics"
+      ],
+      "source_anchors": [
+        "internal/engine/stats.go",
+        "internal/query/execute.go"
+      ],
+      "existing_touch_points": {
+        "files": [
+          "internal/engine/stats.go",
+          "internal/query/execute.go"
+        ],
+        "functions": [
+          "Stats",
+          "Execute"
+        ]
+      }
+    }
+  ]
+}
